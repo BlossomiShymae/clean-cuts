@@ -4,6 +4,13 @@
 
 ## Setup
 
+Initialize git submodules:
+```bash
+git submodule init
+
+git submodule update
+```
+
 Make sure to install the dependencies:
 
 ```bash
