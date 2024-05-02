@@ -3,6 +3,7 @@ import path from "path";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: false,
   nitro: {
     output: {
       publicDir: path.join(__dirname, "docs"),
