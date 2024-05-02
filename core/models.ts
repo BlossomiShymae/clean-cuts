@@ -231,6 +231,10 @@ export class SummonerIcon extends CommunityDragonObject {
     this.descriptions = json.descriptions.map((x: any) => new Description(x));
     this.rarities = json.rarities.map((x: any) => new Rarity(x));
   }
+
+  getImage(version: string): string {
+    return this.resolveClientPath({path: this.imagePath ?? "", args: {version: version, locale: "default"}});
+  }
 }
 
 export class WardSkin extends CommunityDragonObject {
