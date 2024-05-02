@@ -43,7 +43,7 @@
                             </NuxtLink>
                         </li>
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/">
+                            <NuxtLink class="nav-link" to="/summoner-emotes">
                               <MaterialIcon name="face-woman-shimmer" :size="24" /> Emotes
                             </NuxtLink>
                           </li>

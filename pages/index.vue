@@ -21,28 +21,28 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="d-flex flex-column justify-content-center align-items-stretch gap-2">
-                        <a class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25" asp-area="" asp-page="/Champion/Index">
+                        <NuxtLink to="/champions" class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
                           <MaterialIcon name="account-group" :size="24"/> Champions
-                        </a>
-                        <a class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
+                        </NuxtLink>
+                        <NuxtLink to="/items" class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
                           <MaterialIcon name="magic-staff" :size="24"/> Items
-                        </a>
-                        <a class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
+                        </NuxtLink>
+                        <NuxtLink to="/runes" class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
                           <MaterialIcon name="shield" :size="24"/> Runes
-                        </a>
+                        </NuxtLink>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="d-flex flex-column justify-content-center align-items-stretch gap-2">
-                        <a class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
+                        <NuxtLink to="/summoner-icons" class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
                           <MaterialIcon name="image" :size="24"/> Summoner Icons
-                        </a>
-                        <a class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
+                        </NuxtLink>
+                        <NuxtLink to="/ward-skins" class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
                           <MaterialIcon name="floor-lamp" :size="24"/> Ward Skins
-                        </a>
-                        <a class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
+                        </NuxtLink>
+                        <NuxtLink to="/summoner-emotes" class="btn btn-dark bg-transparent bg-blur-3 border-light border-opacity-25">
                           <MaterialIcon name="face-woman-shimmer" :size="24"/> Emotes
-                        </a>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
