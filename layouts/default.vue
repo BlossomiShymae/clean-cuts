@@ -28,7 +28,7 @@
                             </NuxtLink>
                         </li>
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/">
+                            <NuxtLink class="nav-link" to="/runes">
                               <MaterialIcon name="shield" :size="24" /> Runes
                             </NuxtLink>
                         </li>
@@ -76,7 +76,7 @@
 
 <script>
 import MaterialIcon from '~/components/MaterialIcon.vue';
-import Title from '~/components/Title.vue';
+import TheTitle from '~/components/TheTitle.vue';
 </script>
 
 <style lang="scss">
