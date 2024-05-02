@@ -68,7 +68,7 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-center pt-2 border-top border-light border-opacity-25">
-            <p class="text-muted fw-light" style="font-size: 0.8rem;">Peaches was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. </p>
+            <p class="text-muted fw-light" style="font-size: 0.8rem;"><TheTitle/> was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project. </p>
         </div>
     </footer>
   </div>
