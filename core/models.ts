@@ -207,7 +207,7 @@ export class SummonerEmote extends CommunityDragonObject {
   }
 
   getInventoryIcon(version: string): string {
-    return this.resolveGamePath({path: this.inventoryIcon, version: version}).replace("inventory", "vfx");
+    return this.resolveClientPath({path: this.inventoryIcon, args: {locale: "default", version: version}});
   }
 }
 
