@@ -5,7 +5,7 @@
         <div class="background background-transparent background-blur-2"></div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-light border-opacity-25 border-2 box-shadow">
             <div class="container">
-                <NuxtLink class="navbar-brand fw-light" to="/" ><Title /></NuxtLink>
+                <NuxtLink class="navbar-brand fw-light" to="/" ><TheTitle /></NuxtLink>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -18,7 +18,7 @@
                             </NuxtLink>
                         </li>
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/">
+                            <NuxtLink class="nav-link" to="/champions">
                               <MaterialIcon name="account-group" :size="24" /> Champions
                             </NuxtLink>
                         </li>
@@ -33,7 +33,7 @@
                             </NuxtLink>
                         </li>
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/">
+                            <NuxtLink class="nav-link" to="/summoner-icons">
                               <MaterialIcon name="image" :size="24" /> Summoner Icons
                             </NuxtLink>
                         </li>

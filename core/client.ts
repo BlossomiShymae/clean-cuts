@@ -1,4 +1,4 @@
-import { ChampionSummary, Item, LocaleVersionArgs, Perk, SummonerEmote, SummonerIcon, WardSkin } from "./models";
+import { Champion, ChampionSummary, Item, LocaleVersionArgs, Perk, SummonerEmote, SummonerIcon, WardSkin } from "./models";
 import axios from "axios";
 
 export abstract class ApiObject {
@@ -12,6 +12,7 @@ export abstract class ApiObject {
 export class Client {
   public items: ItemApi;
   public perks: PerkApi;
+  public champions: ChampionApi;
   public championSummaries: ChampionSummaryApi;
   public summonerEmotes: SummonerEmoteApi;
   public summonerIcons: SummonerIconApi;
@@ -20,6 +21,7 @@ export class Client {
   constructor() {
     this.items = new ItemApi();
     this.perks = new PerkApi();
+    this.champions = new ChampionApi();
     this.championSummaries = new ChampionSummaryApi();
     this.summonerEmotes = new SummonerEmoteApi();
     this.summonerIcons = new SummonerIconApi();
@@ -41,6 +43,13 @@ export class PerkApi extends ApiObject {
   }
 }
 
+export class ChampionApi extends ApiObject {
+  async getAsync(id: number, args: LocaleVersionArgs): Promise<Champion> {
+    let res = await axios.get(`${this.getClientPath(args)}/v1/champions/${id}.json`);
+    return new Champion(res.data);
+  }
+}
+
 export class ChampionSummaryApi extends ApiObject {
   async listAsync(args: LocaleVersionArgs): Promise<Array<ChampionSummary>> {
     let res = await axios.get(`${this.getClientPath(args)}/v1/champion-summary.json`);
@@ -58,7 +67,7 @@ export class SummonerEmoteApi extends ApiObject {
 export class SummonerIconApi extends ApiObject {
   async listAsync(args: LocaleVersionArgs): Promise<Array<SummonerIcon>> {
     let res = await axios.get(`${this.getClientPath(args)}/v1/summoner-icons.json`);
-    return res.data.map((x: any) => new SummonerEmote(x));
+    return res.data.map((x: any) => new SummonerIcon(x));
   }
 }
 

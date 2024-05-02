@@ -1,20 +1,24 @@
 <template>
   <div class="btn-group">
-    <NuxtLink :class="`btn btn-outline-dark ${hasFurtherPreviousCss}`">
+    <a :class="`btn btn-outline-dark`"
+      @click="onFirst()">
       <MaterialIcon name="chevron-double-left" :size="32" />
-    </NuxtLink>
-    <NuxtLink :class="`btn btn-outline-dark ${hasPreviousCss}`">
+    </a>
+    <a :class="`btn btn-outline-dark ${hasPrevCss}`"
+      @click="onPrev()">
       <MaterialIcon name="chevron-left" :size="32" />
-    </NuxtLink>
-    <NuxtLink :class="`btn btn-outline-dark text-light`">
-      {{ pageIndex / totalPages }}
-    </NuxtLink>
-    <NuxtLink :class="`btn btn-outline-dark ${hasNextCss}`">
+    </a>
+    <a :class="`btn btn-outline-dark text-light`">
+      {{ `${index} / ${count - 1}` }}
+    </a>
+    <a :class="`btn btn-outline-dark ${hasNextCss}`"
+      @click="onNext()">
       <MaterialIcon name="chevron-right" :size="32" />
-    </NuxtLink>
-    <NuxtLink :class="`btn btn-outline-dark ${hasFurtherNextCss}`">
+    </a>
+    <a :class="`btn btn-outline-dark `"
+      @click="onLast()">
       <MaterialIcon name="chevron-double-right" :size="32" />
-    </NuxtLink>
+    </a>
   </div>
 </template>
 
@@ -22,18 +26,17 @@
 import MaterialIcon from './MaterialIcon.vue';
 
 const props = defineProps<{
-  hasPrevious: boolean;
-  hasFurtherPrevious: boolean;
-  hasNext: boolean;
-  hasFurtherNext: boolean;
-  pageIndex: number;
-  totalPages: number;
+  index: number,
+  pages: Array<any>,
+  count: number,
+  onPrev: () => void,
+  onNext: () => void,
+  onFirst: () => void,
+  onLast: () => void,
 }>();
 
-const hasPreviousCss = !props.hasPrevious ? "disabled" : "";
-const hasFurtherPreviousCss = !props.hasFurtherPrevious ? "disabled" : "";
-const hasNextCss = !props.hasNext ? "disabled" : "";
-const hasFurtherNextCss = !props.hasFurtherNext ? "disabled" : "";
+const hasPrevCss = computed(() => { return !(props.index > 0) ? "disabled" : ""; });
+const hasNextCss = computed(() => { return !(props.index < props.count - 1) ? "disabled" : "";})
 </script>
 
 <style lang="scss" scoped>
