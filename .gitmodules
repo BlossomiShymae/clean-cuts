@@ -1,0 +1,3 @@
+[submodule "public/lib/MaterialDesign"]
+	path = public/lib/MaterialDesign
+	url = git@github.com:Templarian/MaterialDesign.git
