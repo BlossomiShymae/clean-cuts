@@ -38,7 +38,7 @@
                             </NuxtLink>
                         </li>
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/">
+                            <NuxtLink class="nav-link" to="/ward-skins">
                               <MaterialIcon name="floor-lamp" :size="24" /> Ward Skins
                             </NuxtLink>
                         </li>

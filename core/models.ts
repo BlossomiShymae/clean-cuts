@@ -259,6 +259,14 @@ export class WardSkin extends CommunityDragonObject {
     this.regionDescriptions = json.regionalDescriptions.map((x: any) => new Description(x));
     this.rarities = json.rarities.map((x: any) => new Rarity(x));
   }
+
+  getWardImage(version: string): string {
+    return this.resolveClientPath({path: this.wardImagePath, args: {locale: "default", version: version}});
+  }
+
+  getWardShadowImage(version: string): string {
+    return this.resolveClientPath({path: this.wardShadowImagePath, args: {locale: "default", version: version}});
+  }
 }
 
 export class Description extends CommunityDragonObject {
