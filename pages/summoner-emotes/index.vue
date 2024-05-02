@@ -30,6 +30,7 @@ import usePagination from '../../composables/usePagination';
 
 const { client } = useClient();;
 
-const emotes = await client.summonerEmotes.listAsync({locale: "default", version: "latest"});
+const emotes = (await client.summonerEmotes.listAsync({locale: "default", version: "latest"}))
+  .sort((a, b) => a.id - b.id);
 const { count, pages, index, prev, next, first, last } = usePagination(emotes, 24);
 </script>

@@ -44,11 +44,11 @@
 <script setup lang="ts">
 import Pagination from '~/components/Pagination.vue';
 import useClient from '../../composables/useClient';
-import { SummonerIcon } from '../../core/models';
 import usePagination from '../../composables/usePagination';
 
 const { client } = useClient();
 
-const icons = await client.summonerIcons.listAsync({locale: "default", version: "latest"});
+const icons = (await client.summonerIcons.listAsync({locale: "default", version: "latest"}))
+    .sort((a, b) => a.id - b.id);
 const { count, pages, index, prev, next, first, last } = usePagination(icons, 100);
 </script>

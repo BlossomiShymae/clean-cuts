@@ -37,5 +37,6 @@
 import useClient from '../../composables/useClient';
 
 const { client } = useClient();
-const runes = await client.perks.listAsync({locale: "default", version: "latest"});
+const runes = (await client.perks.listAsync({locale: "default", version: "latest"}))
+    .sort((a, b) => a.id - b.id);
 </script>

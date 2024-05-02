@@ -40,5 +40,6 @@ import useClient from '../../composables/useClient';
 
 const { client } = useClient();
 
-const summaries = await client.championSummaries.listAsync({locale: "default", version: "latest"});
+const summaries = (await client.championSummaries.listAsync({locale: "default", version: "latest"}))
+    .filter((x) => x.id != -1);
 </script>
