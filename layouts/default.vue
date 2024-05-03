@@ -62,6 +62,9 @@
         <div class="d-flex justify-content-around align-items-center gap-2 mb-3 flex-wrap">
             <NuxtLink class="text-decoration-none text-light" to="about">About</NuxtLink>
             <a class="text-decoration-none text-light" href="https://challenges.darkintaqt.com" referrerpolicy="no-referrer">Challenge Tracker</a>
+            <a class="text-decoration-none text-light" href="https://github.com/BlossomiShymae/clean-cuts" referrerpolicy="no-referrer">
+              <MaterialIcon name="github" :size="24" /> GitHub
+            </a>
             <a class="text-decoration-none text-light" href="https://blossomishymae.github.io/" referrerpolicy="no-referrer">blossomishymae.github.io</a>
             <a class="text-decoration-none text-light" href="https://communitydragon.org" referrerpolicy="no-referrer">CommunityDragon</a>
             <!-- <a class="text-decoration-none text-light" href="https://discord.com/invite/riotgamesdevrel" referrerpolicy="no-referrer">DevRel Discord</a> -->
