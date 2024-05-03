@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   app: {
+    baseURL: "/clean-cuts/",
     pageTransition: {
       name: "page",
       mode: "out-in",
