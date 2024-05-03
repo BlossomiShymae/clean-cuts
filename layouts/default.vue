@@ -16,11 +16,6 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/">
-                              <MaterialIcon name="home" :size="24" /> Home
-                            </NuxtLink>
-                        </li>
-                        <li class="nav-item">
                             <NuxtLink class="nav-link" to="/champions">
                               <MaterialIcon name="account-group" :size="24" /> Champions
                             </NuxtLink>
