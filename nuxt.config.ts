@@ -22,6 +22,11 @@ export default defineNuxtConfig({
       },
       meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "title", content: "Clean Cuts"},
+        { name: "og:title", content: "Clean Cuts"},
+        { name: "og:description", content: "Making game data viewable in a human-friendly format."},
+        { name: "og:image", content: "https://blossomishymae.github.io/clean-cuts/favicon.png"},
+        { name: "theme-color", content: "#000000"}
       ],
       link: [
         {
