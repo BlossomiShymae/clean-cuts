@@ -9,7 +9,7 @@
       <MaterialIcon name="chevron-left" :size="32" />
     </a>
     <a :class="`btn btn-outline-dark text-light`">
-      {{ `${index + 1} / ${count}` }}
+      <span class="d-flex justify-content-center align-items-center h-100 w-100">{{ `${index + 1} / ${count}` }}</span>
     </a>
     <a :class="`btn btn-outline-dark ${hasNextCss}`"
       @click="onNext()">
