@@ -8,10 +8,8 @@
                     with a shelved project.
                 </p>
                 <p>Our purpose is to provide League of Legends game data that is easy 
-                    to view for the common person. This game data is provided by CommunityDragon, another community resource. 
+                    to view for the common person. This game data is provided by CommunityDragon, another community resource. :3
                 </p>
-                <p>Therefore, no computer programming or scripting is needed. 
-                    Not everyone can browse a JSON or navigate game data folders. :3</p>
                 </div>
         </div>
     </div>
@@ -38,10 +36,10 @@
                 <p>This website uses Nuxt.js, the meta-framework of universal application.</p>
                 <p >Other libraries used include Bootstrap, the CSS framework, and Material Design for icons.</p>
             </div>
-            <div>
+            <!-- <div>
                 <h3 class="fw-light">Contact</h3>
                 <p>Blossomi Shymae can be reached via her Discord server.</p>
-            </div>
+            </div> -->
         </div>
     </div>
   </div>
