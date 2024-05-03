@@ -15,9 +15,9 @@
                   </tr>
               </thead>
               <tbody>
-                <tr v-for="icon in pages[index]" :key="icon.id">
+                <tr v-for="icon in pages[index]" :key="icon.id" style="position: relative;">
                         <th scope="row">
-                            <NuxtLink class="text-decoration-none text-light" :to="`/summoner-icons/overview/${icon.id}`">
+                            <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/summoner-icons/overview/${icon.id}`">
                                 {{ icon.id }}
                             </NuxtLink>
                         </th>

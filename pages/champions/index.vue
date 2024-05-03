@@ -12,9 +12,9 @@
               </tr>
           </thead>
           <tbody>
-            <tr v-for="summary in summaries" :key="summary.id">
+            <tr v-for="summary in summaries" :key="summary.id" style="position: relative;">
                 <th scope="row">
-                    <NuxtLink class="text-decoration-none text-light" :to="`/champions/overview/${summary.id}`">
+                    <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/champions/overview/${summary.id}`">
                         {{ summary.id }}
                     </NuxtLink>
                 </th>

@@ -13,9 +13,9 @@
                   </tr>
               </thead>
               <tbody>
-                <tr v-for="item in items" :key="item.id">
+                <tr v-for="item in items" :key="item.id" style="position: relative;">
                     <th scope="row">
-                        <NuxtLink class="text-decoration-none text-light" :to="`/items/overview/${item.id}`">
+                        <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/items/overview/${item.id}`">
                             {{ item.id }}
                         </NuxtLink>
                     </th>

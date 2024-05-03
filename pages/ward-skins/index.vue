@@ -15,9 +15,9 @@
                   </tr>
               </thead>
               <tbody>
-                      <tr v-for="skin in pages[index]" :key="skin.id">
+                      <tr v-for="skin in pages[index]" :key="skin.id" style="position: relative;">
                           <th scope="row">
-                              <NuxtLink class="text-decoration-none text-light" :to="`/ward-skins/overview/${skin.id}`">
+                              <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/ward-skins/overview/${skin.id}`">
                                   {{ skin.id }}
                               </NuxtLink>
                           </th>
