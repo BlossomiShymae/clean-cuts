@@ -18,7 +18,7 @@
                         {{ rune.id }}
                     </th>
                     <td>
-                        <img :src="rune.getIcon('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src = '/img/error.png';"/>
+                        <img :src="rune.getIcon('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src = '/clean-cuts/img/error.png';"/>
                     </td>
                     <td>
                         {{ rune.name }}

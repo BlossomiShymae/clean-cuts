@@ -21,7 +21,7 @@
                     </th>
                     <td>
                         <NuxtLink class="text-decoration-none text-light" :to="`/items/overview/${item.id}`">
-                            <img class="rounded" :src="item.getIcon('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src = '/img/error.png'"/>
+                            <img class="rounded" :src="item.getIcon('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src = '/clean-cuts/img/error.png'"/>
                         </NuxtLink>
                     </td>
                     <td>

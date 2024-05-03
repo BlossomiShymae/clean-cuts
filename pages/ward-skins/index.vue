@@ -23,7 +23,7 @@
                           </th>
                           <td>
                               <NuxtLink class="text-decoration-none text-light" :to="`/ward-skins/overview/${skin.id}`">
-                                  <img :src="skin.getWardImage('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src='/img/error.png'"/>
+                                  <img :src="skin.getWardImage('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png'"/>
                               </NuxtLink>
                           </td>
                           <td>

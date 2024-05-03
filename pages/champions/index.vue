@@ -20,7 +20,7 @@
                 </th>
                 <td>
                     <NuxtLink :to="`/champions/overview/${summary.id}`">
-                        <img :src="summary.getIcon({locale: 'default', version: 'latest'})" width="32px" height="32px" loading="lazy" onerror="this.onerror = null; this.src='/img/error.png'"/>
+                        <img :src="summary.getIcon({locale: 'default', version: 'latest'})" width="32px" height="32px" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png'"/>
                     </NuxtLink>
                 </td>
                 <td>

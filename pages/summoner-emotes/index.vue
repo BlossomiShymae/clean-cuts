@@ -8,7 +8,7 @@
       <div class="d-flex flex-wrap justify-content-around gap-2">
         <div class="card bg-transparent bg-screen border-light border-opacity-25" style="max-width: 140px; width: 140px;"
             v-for="emote in pages[index]" :key="emote.id">
-            <img :src="emote.getInventoryIcon('latest')" loading="lazy" onerror="this.onerror = null; this.src='/img/error.png';" />
+            <img :src="emote.getInventoryIcon('latest')" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
 
             <div class="card-body">
                 <h5 class="card-title">{{ emote.name }}</h5>
