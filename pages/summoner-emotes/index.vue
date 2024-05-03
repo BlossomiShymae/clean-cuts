@@ -10,7 +10,7 @@
             v-for="emote in pages[index]" :key="emote.id">
             <img :src="emote.getInventoryIcon('latest')" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
 
-            <div class="card-body">
+            <div class="card-body d-flex flex-column justify-content-end">
                 <h5 class="card-title">{{ emote.name }}</h5>
                 <Badge name="identifier">{{ emote.id }}</Badge>
             </div>
