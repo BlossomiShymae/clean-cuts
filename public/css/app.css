@@ -22,7 +22,7 @@ html::after {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #0008;
+  background-color: #000B;
   z-index: 1;
 
   backdrop-filter: blur(0.2rem);
