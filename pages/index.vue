@@ -2,7 +2,10 @@
   <div>
     <div class="d-flex flex-column justify-content-center align-items-center gap-2" style="margin-top: 25%;">
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <h1 class="display-4"><TheTitle /></h1>
+            <h1 class="display-4">
+              <img class="me-4" src="/favicon.png"/>
+              <TheTitle />
+            </h1>
             <p>Your local League of Legends companion index.</p>
         </div>
     </div>

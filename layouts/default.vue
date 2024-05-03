@@ -5,7 +5,10 @@
         <div class="background background-transparent background-blur-2"></div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-light border-opacity-25 border-2 box-shadow">
             <div class="container">
-                <NuxtLink class="navbar-brand fw-light" to="/" ><TheTitle /></NuxtLink>
+                <NuxtLink class="navbar-brand fw-light" to="/" >
+                  <img class="me-1" src="/favicon.png" width="24" height="24"/>
+                  <TheTitle />
+                </NuxtLink>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
