@@ -1,15 +1,16 @@
-# Clean Cuts
+# [Clean Cuts](https://blossomishymae.github.io/clean-cuts/)
+
+Making game data viewable in a human-friendly format.
 
 ![](preview.png)
 
+## Contributors
+
+<a href="https://github.com/BlossomiShymae/clean-cuts/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=BlossomiShymae/clean-cuts" />
+</a>
+
 ## Setup
-
-Initialize git submodules:
-```bash
-git submodule init
-
-git submodule update
-```
 
 Make sure to install the dependencies:
 
