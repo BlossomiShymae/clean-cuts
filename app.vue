@@ -4,6 +4,16 @@
   </NuxtLayout>
 </template>
 
+<script setup>
+useSeoMeta({
+  title: "Clean Cuts",
+  ogTitle: "Clean Cuts",
+  ogDescription: "Making game data viewable in a human-friendly format.",
+  ogImage: "https://blossomishymae.github.io/clean-cuts/favicon.png",
+  themeColor: "#000000",
+});
+</script>
+
 <style>
 .page-enter-active,
 .page-leave-active {
