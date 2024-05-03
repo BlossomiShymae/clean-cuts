@@ -1,6 +1,6 @@
 <template>
   <svg :width="size" :height="size">
-    <image :href="`/lib/MaterialDesign/svg/${name}.svg`"
+    <image :href="`https://raw.githubusercontent.com/Templarian/MaterialDesign/master/svg/${name}.svg`"
       :width="size"
       :height="size"/>
   </svg>

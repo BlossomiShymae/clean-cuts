@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
@@ -34,12 +33,12 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
-          href: "/css/app.css",
+          href: "/clean-cuts/css/app.css",
         },
         {
           rel: "icon",
           type: "image/png",
-          href: "/favicon.png",
+          href: "/clean-cuts/favicon.png",
         },
       ],
       script: [
