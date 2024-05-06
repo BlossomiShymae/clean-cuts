@@ -58,7 +58,7 @@
 
     <footer class="container border border-light border-opacity-25 rounded p-4 pb-2 mt-2 mb-4 bg-blur-4">
         <div class="d-flex justify-content-around align-items-center gap-2 mb-3 flex-wrap">
-            <NuxtLink class="text-decoration-none text-light" to="about">About</NuxtLink>
+            <NuxtLink class="text-decoration-none text-light" to="/about">About</NuxtLink>
             <a class="text-decoration-none text-light" href="https://challenges.darkintaqt.com" referrerpolicy="no-referrer">Challenge Tracker</a>
             <a class="text-decoration-none text-light" href="https://github.com/BlossomiShymae/clean-cuts" referrerpolicy="no-referrer">
               <MaterialIcon name="github" :size="24" /> GitHub
