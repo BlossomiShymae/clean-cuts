@@ -2,8 +2,13 @@
   <div class="d-flex flex-column gap-2">
       <h1>Ward Skins</h1>
 
-      <Pagination :pages="pages" :count="count" :index="index" :on-prev="prev" :on-next="next"
-        :on-first="first" :on-last="last"/>
+      <div class="input-group">
+        <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
+            v-model="query"/>
+      </div>
+
+      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
+        :on-first="p.first" :on-last="p.last"/>
       
       <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
           <table class="sortable table table-borderless">
@@ -15,7 +20,7 @@
                   </tr>
               </thead>
               <tbody>
-                      <tr v-for="skin in pages[index]" :key="skin.id" style="position: relative;">
+                      <tr v-for="skin in p.pages[p.index.value]" :key="skin.id" style="position: relative;">
                           <th scope="row">
                               <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/ward-skins/overview/${skin.id}`">
                                   {{ skin.id }}
@@ -36,18 +41,31 @@
           </table>
       </div>
 
-      <Pagination :pages="pages" :count="count" :index="index" :on-prev="prev" :on-next="next"
-        :on-first="first" :on-last="last"/>
+      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
+        :on-first="p.first" :on-last="p.last"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import Pagination from '../../components/Pagination.vue';
 import useClient from '../../composables/useClient';
+import useIsNumeric from '../../composables/useIsNumeric';
 import usePagination from '../../composables/usePagination';
 
 const { client } = useClient();
 
+const query = ref("");
+
 const skins = await client.wardSkins.listAsync({locale: "default", version: "latest"});
-const { count, pages, index, prev, next, first, last } = usePagination(skins, 100);
+
+const { isNumeric } = useIsNumeric();
+const p = computed(() => {
+    let filtered = [];
+    if (isNumeric(query.value))
+        filtered = skins.filter((x) => x.id == parseInt(query.value, 10));
+    else 
+        filtered = skins.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
+
+    return usePagination(filtered, 100);
+})
 </script>

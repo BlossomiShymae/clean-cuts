@@ -2,8 +2,13 @@
   <div class="d-flex flex-column gap-2">
       <h1>Summoner Icons</h1>
 
-      <Pagination :pages="pages" :count="count" :index="index" :on-prev="prev" :on-next="next"
-        :on-first="first" :on-last="last"/>
+      <div class="input-group">
+        <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
+            v-model="query"/>
+      </div>
+
+      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
+        :on-first="p.first" :on-last="p.last"/>
 
       <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
           <table class="sortable table table-borderless">
@@ -15,7 +20,7 @@
                   </tr>
               </thead>
               <tbody>
-                <tr v-for="icon in pages[index]" :key="icon.id" style="position: relative;">
+                <tr v-for="icon in p.pages[p.index.value]" :key="icon.id" style="position: relative;">
                         <th scope="row">
                             <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/summoner-icons/overview/${icon.id}`">
                                 {{ icon.id }}
@@ -36,8 +41,8 @@
           </table>
       </div>
 
-      <Pagination :pages="pages" :count="count" :index="index" :on-prev="prev" :on-next="next"
-        :on-first="first" :on-last="last"/>
+      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
+        :on-first="p.first" :on-last="p.last"/>
   </div>
 </template>
 
@@ -45,10 +50,23 @@
 import Pagination from '~/components/Pagination.vue';
 import useClient from '../../composables/useClient';
 import usePagination from '../../composables/usePagination';
+import useIsNumeric from '../../composables/useIsNumeric';
 
 const { client } = useClient();
 
+const query = ref("")
+
 const icons = (await client.summonerIcons.listAsync({locale: "default", version: "latest"}))
     .sort((a, b) => a.id - b.id);
-const { count, pages, index, prev, next, first, last } = usePagination(icons, 100);
+
+const { isNumeric } = useIsNumeric();
+const p = computed(() => {
+    let filtered = [];
+    if (isNumeric(query.value))
+        filtered = icons.filter((x) => x.id == parseInt(query.value, 10));
+    else 
+        filtered = icons.filter((x) => x.title.toLowerCase().includes(query.value.toLowerCase()));
+
+    return usePagination(filtered, 100);
+});
 </script>
