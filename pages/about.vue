@@ -36,10 +36,10 @@
                 <p>This website uses Nuxt.js, the meta-framework of universal application.</p>
                 <p >Other libraries used include Bootstrap, the CSS framework, and Material Design for icons.</p>
             </div>
-            <!-- <div>
+            <div>
                 <h3 class="fw-light">Contact</h3>
-                <p>Blossomi Shymae can be reached via her Discord server.</p>
-            </div> -->
+                <p><a href="https://discord.gg/chEvEX5J4E">Blossomi Shymae can be reached via her Discord server.</a></p>
+            </div>
         </div>
     </div>
   </div>
