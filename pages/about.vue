@@ -23,7 +23,7 @@
                     <NuxtLink class="text-decoration-none d-inline-block text-light m-0" to="https://blossomishymae.github.io"><h5 class="text-light mb-0">Blossomi Shymae</h5></NuxtLink>
                     <NuxtLink class="text-decoration-none d-inline-block text-light m-0" to="https://github.com/BlossomiShymae"><span><MaterialIcon name="github" :size="20" /> </span></NuxtLink>
                 </div>
-                    <h5 class="fw-bold m-0 mb-2">Lonely elf girl</h5>
+                    <h5 class="fw-bold m-0 mb-2">Shy elf girl</h5>
                     <p>She likes to chat with her friends and do random programming projects, such as this one.
                     </p>
                 </div>
