@@ -292,3 +292,33 @@ export class Rarity extends CommunityDragonObject {
     this.rarity = json.rarity;
   }
 }
+
+export class Companion extends CommunityDragonObject {
+  contentId: string;
+  itemId: number;
+  name: string;
+  loadoutsIcon: string;
+  description: string;
+  level: number;
+  speciesName: string;
+  speciesId: string;
+  rarity: string;
+  
+  constructor(json: any) {
+    super();
+
+    this.contentId = json.contentId;
+    this.itemId = json.itemId;
+    this.name = json.name;
+    this.loadoutsIcon = json.loadoutsIcon;
+    this.description = json.description;
+    this.level = json.level;
+    this.speciesName = json.speciesName;
+    this.speciesId = json.speciesId;
+    this.rarity = json.rarity;
+  }
+
+  getLoadoutsIcon(version: string): string {
+    return this.resolveGamePath({path: this.loadoutsIcon, version: version});
+  }
+}
