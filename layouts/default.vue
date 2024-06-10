@@ -44,7 +44,12 @@
                             <NuxtLink class="nav-link" to="/summoner-emotes">
                               <MaterialIcon name="face-woman-shimmer" :size="24" /> Emotes
                             </NuxtLink>
-                          </li>
+                        </li>
+                        <li class="nav-item">
+                            <NuxtLink class="nav-link" to="/companions">
+                              <MaterialIcon name="penguin" :size="24" /> Companions
+                            </NuxtLink>
+                        </li>
                     </ul>
                 </div>
             </div>
