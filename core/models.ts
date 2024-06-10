@@ -319,6 +319,6 @@ export class Companion extends CommunityDragonObject {
   }
 
   getLoadoutsIcon(version: string): string {
-    return this.resolveGamePath({path: this.loadoutsIcon, version: version});
+    return this.resolveClientPath({path: this.loadoutsIcon, args: {locale: "default", version: version}});
   }
 }

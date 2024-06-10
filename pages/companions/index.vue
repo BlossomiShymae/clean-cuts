@@ -17,26 +17,22 @@
             <th scope="col">Item Id</th>
             <th scope="col">Icon</th>
             <th scope="col">Name</th>
-            <th scope="col">Species Name</th>
             <th scope="col">Species ID</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="companion in p.pages[p.index.value]" :key="companion.contentId" style="positon: relative;">
+          <tr v-for="companion in p.pages[p.index.value]" :key="companion.contentId" style="position: relative;">
             <td scope="row">
               <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/companions/overview/${companion.contentId}`">
                 {{ companion.itemId }}
               </NuxtLink>
             </td>
             <td>
-              <img :src="companion.getLoadoutsIcon('latest')" width="32px" height="32px" loading="lazy"
+              <img :src="companion.getLoadoutsIcon('latest')" height="48px" loading="lazy"
               onerror="this.onerror = null; this.src='/clean-cuts/img/error.png'" />
             </td>
             <td>
               {{ companion.name }}
-            </td>
-            <td>
-              {{ companion.speciesName }}
             </td>
             <td>
               {{ companion.speciesId }}
@@ -61,7 +57,8 @@ const { client } = useClient();
 
 const query = ref("");
 
-const companions = await client.companions.listAsync({locale: "default", version: "latest"});
+const companions = (await client.companions.listAsync({locale: "default", version: "latest"}))
+  .sort((a, b) => a.itemId - b.itemId);
 
 const { isNumeric } = useIsNumeric();
 const p = computed(() => {
