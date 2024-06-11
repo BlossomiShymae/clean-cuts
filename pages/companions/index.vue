@@ -23,7 +23,7 @@
         <tbody>
           <tr v-for="companion in p.pages[p.index.value]" :key="companion.contentId" style="position: relative;">
             <td scope="row">
-              <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/companions/overview/${companion.contentId}`">
+              <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/companions/overview/${companion.itemId}`">
                 {{ companion.itemId }}
               </NuxtLink>
             </td>
