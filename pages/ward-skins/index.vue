@@ -67,5 +67,5 @@ const p = computed(() => {
         filtered = skins.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
 
     return usePagination(filtered, 100);
-})
+});
 </script>

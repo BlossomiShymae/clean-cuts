@@ -50,6 +50,11 @@
                               <MaterialIcon name="penguin" :size="24" /> Companions
                             </NuxtLink>
                         </li>
+                        <li class="nav-item">
+                            <NuxtLink class="nav-link" to="/loots">
+                              <MaterialIcon name="treasure-chest" :size="24" /> Loots
+                            </NuxtLink>
+                        </li>
                     </ul>
                 </div>
             </div>
