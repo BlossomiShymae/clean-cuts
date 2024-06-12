@@ -1,4 +1,4 @@
-import { Champion, ChampionSummary, Item, LocaleVersionArgs, Perk, SummonerEmote, SummonerIcon, WardSkin, Companion } from './models';
+import { Champion, ChampionSummary, Item, LocaleVersionArgs, Perk, SummonerEmote, SummonerIcon, WardSkin, Companion, Loot } from './models';
 import axios from "axios";
 
 export abstract class ApiObject {
@@ -18,6 +18,7 @@ export class Client {
   public summonerIcons: SummonerIconApi;
   public wardSkins: WardSkinApi;
   public companions: CompanionsApi;
+  public loots: LootApi;
 
   constructor() {
     this.items = new ItemApi();
@@ -28,6 +29,7 @@ export class Client {
     this.summonerIcons = new SummonerIconApi();
     this.wardSkins = new WardSkinApi();
     this.companions = new CompanionsApi();
+    this.loots = new LootApi();
   }
 }
 
@@ -84,5 +86,12 @@ export class CompanionsApi extends ApiObject {
   async listAsync(args: LocaleVersionArgs): Promise<Array<Companion>> {
     let res = await axios.get(`${this.getClientPath(args)}/v1/companions.json`);
     return res.data.map((x: any) => new Companion(x));
+  }
+}
+
+export class LootApi extends ApiObject {
+  async listAsync(args: LocaleVersionArgs): Promise<Array<Loot>> {
+    let res = await axios.get(`${this.getClientPath(args)}/v1/loot.json`);
+    return res.data['LootItems'].map((x: any) => new Loot(x));
   }
 }

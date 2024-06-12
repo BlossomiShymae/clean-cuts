@@ -322,3 +322,29 @@ export class Companion extends CommunityDragonObject {
     return this.resolveClientPath({path: this.loadoutsIcon, args: {locale: "default", version: version}});
   }
 }
+
+export class Loot extends CommunityDragonObject {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  mappedStoreId: number;
+  rarity: string;
+  type: string;
+
+  constructor(json: any) {
+    super();
+
+    this.id = json.id;
+    this.name = json.name;
+    this.description = json.description;
+    this.image = json.image;
+    this.mappedStoreId = json.mappedStoreId;
+    this.rarity = json.rarity;
+    this.type = json.type;
+  }
+
+  getImage(version: string): string {
+    return this.resolveClientPath({path: this.image, args: {locale: "default", version: version}});
+  }
+}
