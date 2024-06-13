@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="d-flex flex-column justify-content-center align-items-center gap-2" style="margin-top: 25%;">
+    <div class="d-flex flex-column justify-content-center align-items-center gap-2" style="margin-top: 25%;"
+      data-aos="fade-down" data-aos-duration="1000">
         <div class="d-flex flex-column justify-content-center align-items-center">
             <h1 class="display-4">
               <img class="me-4" src="/favicon.png"/>
@@ -11,7 +12,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000">
             <h2>The <TheTitle /> Project</h2>
             <p>Our primary purpose is to make game data viewable in a human-friendly 
                 format without needing computer programming or scripting knowledge. 
@@ -19,7 +20,7 @@
             <p>CommunityDragon, the unofficial League of Legends data resource, is used for our project.</p>
         </div>
 
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000">
             <h2>Resources</h2>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
