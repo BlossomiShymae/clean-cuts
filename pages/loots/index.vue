@@ -2,6 +2,15 @@
   <div class="d-flex flex-column gap-2">
     <h1>Loots</h1>
 
+    <div class="btn-group flex-wrap gap-2">
+      <a class="btn btn-outline-dark" @click="clearFilter()">
+        <MaterialIcon name="backspace-outline" :size="24" />
+      </a>
+      <a class="btn btn-outline-dark text-light" v-for="category in categories" @click="applyFilter(category)">
+        {{ category }}
+      </a>
+    </div>
+
     <div class="input-group">
       <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
         v-model="query"/>
@@ -29,26 +38,34 @@
 </template>
 
 <script setup lang="ts">
+import MaterialIcon from '../../components/MaterialIcon.vue';
 import Pagination from "../../components/Pagination.vue";
 import useClient from '../../composables/useClient';
 import useIsNumeric from "../../composables/useIsNumeric";
 import usePagination from '../../composables/usePagination';
-import Badge from "~/components/Badge.vue";
 
 const { client } = useClient();
 
 const query = ref("");
+const filter = ref("");
+
+const clearFilter = () => filter.value = "";
+const applyFilter = (category: string) => filter.value = category;
 
 // Alphanumerically sort by id, remove null entries
 const loots = (await client.loots.listAsync({locale: "default", version: "latest"}))
   .sort((a, b) => a.id.localeCompare(b.id))
   .filter((x) => x.id != "");
 
+const categories = new Set(loots.map((x) => x.type));
+
 const { isNumeric } = useIsNumeric();
 const p = computed(() => {
   let filtered = [];
   
   filtered = loots.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
+  if (filter.value != "")
+    filtered = loots.filter((x) => x.type == filter.value);
 
   return usePagination(filtered, 100);
 });
