@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row mb-4">
+    <div class="row mb-4" data-aos="fade-down" data-aos-duration="1000">
         <div class="d-flex align-items-center flex-column">
             <div class="col-md-6">
                     <h1 class="display-4">About <TheTitle /> </h1>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 d-flex justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" data-aos="fade-right" data-aos-duration="1000">
             <div style="width: 250px !important;" class="d-flex flex-column justify-content-center align-items-center gap-1 border border-light border-opacity-25 bg-blur-3 rounded">
                 <img class="img-fluid rounded mb-2" src="/img/avatar.png"/>
                 <div class="px-3">
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 d-flex flex-column justify-content-around">
+        <div class="col-md-6 d-flex flex-column justify-content-around" data-aos="fade-left" data-aos-duration="1000"   >
             <div>
                 <h3 class="fw-light">Technology stack</h3>
                 <p>This website uses Nuxt.js, the meta-framework of universal application.</p>
