@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         "data-bs-theme": "dark",
-        "style": "background-image: url('https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498004.jpg');"
+        "style": "background-image: url('https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498000.jpg');"
       },
       bodyAttrs: {
         class: "h-100"

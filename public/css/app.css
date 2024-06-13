@@ -5,6 +5,7 @@
 html {
   font-size: 14px;
 
+  background-image: none;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

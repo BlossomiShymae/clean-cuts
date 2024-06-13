@@ -88,6 +88,27 @@
 <script>
 import MaterialIcon from '~/components/MaterialIcon.vue';
 import TheTitle from '~/components/TheTitle.vue';
+
+// Hardcode splash art links for performance reasons. This is the layout after all.
+const splashes = [
+  "https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498000.jpg", // Xayah - Sunday
+  "https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498001.jpg", // Cosmic Dusk - Monday
+  "https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498002.jpg", // Sweetheart - Tuesday
+  "https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498004.jpg", // Star Guardian - Wednesday
+  "https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498028.jpg", // Arcana - Thursday
+  "https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498037.jpg", // Broken Convenant - Friday
+  "https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498038.jpg", // Redeemed Star Guardian - Saturday
+];
+
+const date = new Date();
+const day = date.getDay();
+
+useHead({
+  htmlAttrs: {
+    "data-bs-theme": "dark",
+    "style": `background-image: url('${splashes[day]}')` // Use splash of corresponding day
+  }
+});
 </script>
 
 <style lang="scss">
