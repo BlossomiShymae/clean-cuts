@@ -17,8 +17,8 @@
 
         <div class="card-body d-flex flex-column justify-content-end">
           <h5>{{ loot.name }}</h5>
-          <span class="small border-bottom border-light border-opacity-25 pb-2 mb-2">{{ loot.id }}</span>
-          <span>{{ loot.rarity }}</span>
+          <span class="small pb-2 mb-2">{{ loot.id }}</span>
+            <img v-if="loot.rarity != 'Default'" :src="`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-parties/global/default/${loot.rarity.toLowerCase()}_plating_big.png`" />
         </div>
       </div>
     </div>
