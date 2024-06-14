@@ -22,7 +22,7 @@
     <div class="d-flex flex-wrap justify-content-around gap-2">
       <div class="card bg-transparent bg-screen border-light border-opacity-25" style="max-width: 180px; width: 180px;"
         v-for="loot in p.pages[p.index.value]" :key="loot.id">
-        <img :src="loot.getImage('latest')" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
+        <img :src="getLootImage(loot)" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
 
         <div class="card-body d-flex flex-column justify-content-end">
           <h5>{{ loot.name }}</h5>
@@ -43,6 +43,7 @@ import Pagination from "../../components/Pagination.vue";
 import useClient from '../../composables/useClient';
 import useIsNumeric from "../../composables/useIsNumeric";
 import usePagination from '../../composables/usePagination';
+import { Loot } from '../../core/models';
 
 const { client } = useClient();
 
@@ -69,4 +70,13 @@ const p = computed(() => {
 
   return usePagination(filtered, 100);
 });
+
+const summaries = await client.championSummaries.listAsync({locale: "default", version: "latest"});
+
+const getLootImage = (loot: Loot) => {
+  if (loot.type.includes('Statstone'))
+    return summaries.find((x) => loot.name.toLowerCase().includes(x.name.toLowerCase()))?.getIcon({locale: "default", version: "latest"});
+
+  return loot.getImage('latest');
+}
 </script>
