@@ -49,22 +49,28 @@
 <script setup lang="ts">
 import Pagination from '../../components/Pagination.vue';
 import useClient from '../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 import useIsNumeric from '../../composables/useIsNumeric';
 import usePagination from '../../composables/usePagination';
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getSkins = async () => await client.wardSkins.listAsync({locale: currentLocale.value, version: "latest"});
 
 const query = ref("");
 
-const skins = await client.wardSkins.listAsync({locale: "default", version: "latest"});
+const skins = ref(await getSkins());
+watch(currentLocale, async() => {
+    skins.value = await getSkins();
+});
 
 const { isNumeric } = useIsNumeric();
 const p = computed(() => {
     let filtered = [];
     if (isNumeric(query.value))
-        filtered = skins.filter((x) => x.id == parseInt(query.value, 10));
+        filtered = skins.value.filter((x) => x.id == parseInt(query.value, 10));
     else 
-        filtered = skins.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
+        filtered = skins.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
 
     return usePagination(filtered, 100);
 });

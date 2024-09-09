@@ -31,23 +31,29 @@
 import Pagination from '../../components/Pagination.vue';
 import Badge from '~/components/Badge.vue';
 import useClient from '../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 import useIsNumeric from '../../composables/useIsNumeric';
 import usePagination from '../../composables/usePagination';
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getEmotes = async () => (await client.summonerEmotes.listAsync({locale: currentLocale.value, version: "latest"}))
+.sort((a, b) => a.id - b.id);
 
 const query = ref("");
 
-const emotes = (await client.summonerEmotes.listAsync({locale: "default", version: "latest"}))
-  .sort((a, b) => a.id - b.id);
+const emotes = ref(await getEmotes());
+watch(currentLocale, async() => {
+  emotes.value = await getEmotes();
+});
 
 const { isNumeric } = useIsNumeric();
 const p = computed(() => {
   let filtered = [];
   if (isNumeric(query.value))
-      filtered = emotes.filter((x) => x.id == parseInt(query.value, 10));
+      filtered = emotes.value.filter((x) => x.id == parseInt(query.value, 10));
   else 
-      filtered = emotes.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
+      filtered = emotes.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
 
   return usePagination(filtered, 24);
 })

@@ -35,8 +35,15 @@
 
 <script setup lang="ts">
 import useClient from '../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 
 const { client } = useClient();
-const runes = (await client.perks.listAsync({locale: "default", version: "latest"}))
-    .sort((a, b) => a.id - b.id);
+const { currentLocale } = useLocale();
+const getRunes = async () => (await client.perks.listAsync({locale: currentLocale.value, version: "latest"}))
+.sort((a, b) => a.id - b.id)
+
+const runes = ref(await getRunes());
+watch(currentLocale, async() => {
+    runes.value = await getRunes();
+});
 </script>

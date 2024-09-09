@@ -49,23 +49,29 @@
 <script setup lang="ts">
 import Pagination from '~/components/Pagination.vue';
 import useClient from '../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 import usePagination from '../../composables/usePagination';
 import useIsNumeric from '../../composables/useIsNumeric';
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getIcons = async () => (await client.summonerIcons.listAsync({locale: currentLocale.value, version: "latest"}))
+.sort((a, b) => a.id - b.id);
 
 const query = ref("")
 
-const icons = (await client.summonerIcons.listAsync({locale: "default", version: "latest"}))
-    .sort((a, b) => a.id - b.id);
+const icons = ref(await getIcons());
+watch(currentLocale, async() => {
+    icons.value = await getIcons();
+});
 
 const { isNumeric } = useIsNumeric();
 const p = computed(() => {
     let filtered = [];
     if (isNumeric(query.value))
-        filtered = icons.filter((x) => x.id == parseInt(query.value, 10));
+        filtered = icons.value.filter((x) => x.id == parseInt(query.value, 10));
     else 
-        filtered = icons.filter((x) => x.title.toLowerCase().includes(query.value.toLowerCase()));
+        filtered = icons.value.filter((x) => x.title.toLowerCase().includes(query.value.toLowerCase()));
 
     return usePagination(filtered, 100);
 });

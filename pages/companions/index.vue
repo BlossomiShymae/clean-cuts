@@ -50,23 +50,29 @@
 <script setup lang="ts">
 import Pagination from "../../components/Pagination.vue";
 import useClient from "../../composables/useClient";
+import useLocale from "~/composables/useLocale";
 import useIsNumeric from "../../composables/useIsNumeric";
 import usePagination from "../../composables/usePagination";
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getCompanions = async () => (await client.companions.listAsync({locale: currentLocale.value, version: "latest"}))
+.sort((a, b) => a.itemId - b.itemId);
 
 const query = ref("");
 
-const companions = (await client.companions.listAsync({locale: "default", version: "latest"}))
-  .sort((a, b) => a.itemId - b.itemId);
+const companions = ref(await getCompanions());
+watch(currentLocale, async() => {
+  companions.value = await getCompanions();
+});
 
 const { isNumeric } = useIsNumeric();
 const p = computed(() => {
   let filtered = [];
   if (isNumeric(query.value))
-    filtered = companions.filter((x) => x.itemId == parseInt(query.value, 10));
+    filtered = companions.value.filter((x) => x.itemId == parseInt(query.value, 10));
   else
-    filtered = companions.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
+    filtered = companions.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
 
   return usePagination(filtered, 100);
 })

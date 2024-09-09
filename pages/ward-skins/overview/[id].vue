@@ -21,13 +21,20 @@
 import { WardSkin } from '~/core/models';
 import Badge from '../../../components/Badge.vue';
 import useClient from '../../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const id = route.params.id as unknown;
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getSkins = async () => await client.wardSkins.listAsync({locale: currentLocale.value, version: "latest"});
 
-const skins = await client.wardSkins.listAsync({locale: "default", version: "latest"});
-const skin = skins.find((x) => x.id == id) || new WardSkin({});
+const skins = ref(await getSkins());
+watch(currentLocale, async() => {
+    skins.value = await getSkins();
+});
+
+const skin = skins.value.find((x) => x.id == id) || new WardSkin({});
 </script>

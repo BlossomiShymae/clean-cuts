@@ -37,9 +37,15 @@
 
 <script setup lang="ts">
 import useClient from '../../composables/useClient';
+import useLocale from "../../composables/useLocale";
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getSummaries = async () => (await client.championSummaries.listAsync({locale: currentLocale.value, version: "latest"}))
+.filter((x) => x.id != -1);
 
-const summaries = (await client.championSummaries.listAsync({locale: "default", version: "latest"}))
-    .filter((x) => x.id != -1);
+const summaries = ref(await getSummaries());
+watch(currentLocale, async () => {
+    summaries.value = await getSummaries();
+});
 </script>

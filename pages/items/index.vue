@@ -43,7 +43,14 @@
 
 <script setup lang="ts">
 import useClient from '../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 
 const { client } = useClient();
-const items = await client.items.listAsync({ locale: "default", version: "latest"});
+const { currentLocale } = useLocale();
+const getItems = async () => await client.items.listAsync({ locale: currentLocale.value, version: "latest"});
+
+const items = ref(await getItems());
+watch(currentLocale, async () => {
+    items.value = await getItems();
+});
 </script>

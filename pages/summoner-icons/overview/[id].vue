@@ -20,13 +20,20 @@
 import Badge from '~/components/Badge.vue';
 import { useRoute } from 'vue-router';
 import useClient from '../../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 import { SummonerIcon } from '~/core/models';
 
 const route = useRoute();
 const id = route.params.id as unknown;
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getIcons = async () => await client.summonerIcons.listAsync({locale: currentLocale.value, version: "latest"});
 
-const icons = await client.summonerIcons.listAsync({locale: "default", version: "latest"});
-const icon = icons.find((x) => x.id == id) || new SummonerIcon({});
+const icons = ref(await getIcons());
+watch(currentLocale, async() => {
+  icons.value = await getIcons();
+});
+
+const icon = icons.value.find((x) => x.id == id) || new SummonerIcon({});
 </script>

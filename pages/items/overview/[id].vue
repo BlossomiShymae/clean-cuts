@@ -47,6 +47,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import useClient from '../../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 import { Item } from '~/core/models';
 import Badge from '~/components/Badge.vue';
 
@@ -54,12 +55,15 @@ const route = useRoute();
 const id = route.params.id as unknown;
 
 const { client } = useClient();
-const items = await client.items.listAsync({locale: "default", version: "latest"});
+const { currentLocale } = useLocale();
+const getItems = async () => await client.items.listAsync({locale: currentLocale.value, version: "latest"});
+
+const items = ref(await getItems());
 const _default = new Item({});
 
-const item = items.find((x) => x.id == id) || _default;
-const components = item.from.map((id) => items.find((x) => x.id == id) || _default);
-const composites = item.to.map((id) => items.find((x) => x.id == id) || _default);
+const item = computed(() => items.value.find((x) => x.id == id) || _default);
+const components = computed(() => item.value.from.map((id) => items.value.find((x) => x.id == id) || _default));
+const composites = computed(() => item.value.to.map((id) => items.value.find((x) => x.id == id) || _default));
 </script>
 
 

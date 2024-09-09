@@ -41,42 +41,51 @@
 import MaterialIcon from '../../components/MaterialIcon.vue';
 import Pagination from "../../components/Pagination.vue";
 import useClient from '../../composables/useClient';
+import useLocale from '~/composables/useLocale';
 import useIsNumeric from "../../composables/useIsNumeric";
 import usePagination from '../../composables/usePagination';
 import { Loot } from '../../core/models';
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
 
 const query = ref("");
 const filter = ref("");
+const getLoots = async () => (await client.loots.listAsync({locale: currentLocale.value, version: "latest"}))
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .filter((x) => x.id != "");
+const getSummaries = async () => await client.championSummaries.listAsync({locale: currentLocale.value, version: "latest"});
 
 const clearFilter = () => filter.value = "";
 const applyFilter = (category: string) => filter.value = category;
 
 // Alphanumerically sort by id, remove null entries
-const loots = (await client.loots.listAsync({locale: "default", version: "latest"}))
-  .sort((a, b) => a.id.localeCompare(b.id))
-  .filter((x) => x.id != "");
+const loots = ref(await getLoots());
 
-const categories = new Set(loots.map((x) => x.type));
+const categories = new Set(loots.value.map((x) => x.type));
 
 const { isNumeric } = useIsNumeric();
 const p = computed(() => {
   let filtered = [];
   
-  filtered = loots.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
+  filtered = loots.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
   if (filter.value != "")
-    filtered = loots.filter((x) => x.type == filter.value);
+    filtered = loots.value.filter((x) => x.type == filter.value);
 
   return usePagination(filtered, 100);
 });
 
-const summaries = await client.championSummaries.listAsync({locale: "default", version: "latest"});
+const summaries = ref(await getSummaries());
 
 const getLootImage = (loot: Loot) => {
   if (loot.type.includes('Statstone'))
-    return summaries.find((x) => loot.name.toLowerCase().includes(x.name.toLowerCase()))?.getIcon({locale: "default", version: "latest"});
+    return summaries.value.find((x) => loot.name.toLowerCase().includes(x.name.toLowerCase()))?.getIcon({locale: "default", version: "latest"});
 
   return loot.getImage('latest');
 }
+
+watch(currentLocale, async() => {
+  loots.value = await getLoots();
+  summaries.value = await getSummaries();
+});
 </script>

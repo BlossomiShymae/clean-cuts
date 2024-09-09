@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import Badge from "../../../components/Badge.vue";
 import useClient from "../../../composables/useClient";
+import useLocale from "~/composables/useLocale";
 import { Companion } from "~/core/models";
 import { useRoute } from "vue-router";
 
@@ -26,7 +27,13 @@ const route = useRoute();
 const id = route.params.id as unknown;
 
 const { client } = useClient();
+const { currentLocale } = useLocale();
+const getCompanions = async () => await client.companions.listAsync({locale: currentLocale.value, version: "latest"});
 
-const companions = await client.companions.listAsync({locale: "default", version: "latest"});
-const companion = companions.find((x) => x.itemId == id) || new Companion({});
+const companions = ref(await getCompanions());
+watch(currentLocale, async() => {
+  companions.value = await getCompanions();
+});
+
+const companion = companions.value.find((x) => x.itemId == id) || new Companion({});
 </script>
