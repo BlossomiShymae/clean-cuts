@@ -79,6 +79,11 @@ table > tbody > tr:hover > * {
   background-color: #0008 !important;
 }
 
+ul.dropdown-menu {
+  background: transparent;
+  backdrop-filter: blur(0.4rem);
+}
+
 .background {
   height: 100%;
   width: 100%;

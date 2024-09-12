@@ -16,45 +16,77 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/champions">
-                              <MaterialIcon name="account-group" :size="24" /> Champions
-                            </NuxtLink>
+                            <div class="dropdown">
+                              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                League
+                              </button>
+                              <ul class="dropdown-menu p-2">
+                                <li>
+                                  <NuxtLink class="nav-link" to="/champions">
+                                    <MaterialIcon name="account-group" :size="24" /> Champions
+                                  </NuxtLink>
+                                </li>
+                                <li>
+                                  <NuxtLink class="nav-link" to="/items">
+                                    <MaterialIcon name="magic-staff" :size="24" /> Items
+                                  </NuxtLink>
+                                </li>
+                                <li>
+                                  <NuxtLink class="nav-link" to="/runes">
+                                    <MaterialIcon name="shield" :size="24" /> Runes
+                                  </NuxtLink>
+                                </li>
+                                <li>
+                                  <NuxtLink class="nav-link" to="/ward-skins">
+                                    <MaterialIcon name="floor-lamp" :size="24" /> Ward Skins
+                                  </NuxtLink>
+                                </li>
+                              </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/items">
-                              <MaterialIcon name="magic-staff" :size="24" /> Items
-                            </NuxtLink>
+                          <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                              TFT
+                            </button>
+                            <ul class="dropdown-menu p-2">
+                              <li>
+                                <NuxtLink class="nav-link" to="/companions">
+                                  <MaterialIcon name="penguin" :size="24" /> Companions
+                                </NuxtLink>
+                              </li>
+                            </ul>
+                          </div>
                         </li>
                         <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/runes">
-                              <MaterialIcon name="shield" :size="24" /> Runes
-                            </NuxtLink>
+                          <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                              Shared
+                            </button>
+                            <ul class="dropdown-menu p-2">
+                              <li>
+                                <NuxtLink class="nav-link" to="/summoner-icons">
+                                  <MaterialIcon name="image" :size="24" /> Summoner Icons
+                                </NuxtLink>
+                              </li>
+                              <li>
+                                <NuxtLink class="nav-link" to="/summoner-emotes">
+                                  <MaterialIcon name="face-woman-shimmer" :size="24" /> Emotes
+                                </NuxtLink>
+                              </li>
+                              <li>
+                                <NuxtLink class="nav-link" to="/loots">
+                                  <MaterialIcon name="treasure-chest" :size="24" /> Loots
+                                </NuxtLink>
+                              </li>
+                            </ul>
+                          </div>
                         </li>
-                        <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/summoner-icons">
-                              <MaterialIcon name="image" :size="24" /> Summoner Icons
-                            </NuxtLink>
-                        </li>
-                        <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/ward-skins">
-                              <MaterialIcon name="floor-lamp" :size="24" /> Ward Skins
-                            </NuxtLink>
-                        </li>
-                        <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/summoner-emotes">
-                              <MaterialIcon name="face-woman-shimmer" :size="24" /> Emotes
-                            </NuxtLink>
-                        </li>
-                        <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/companions">
-                              <MaterialIcon name="penguin" :size="24" /> Companions
-                            </NuxtLink>
-                        </li>
-                        <li class="nav-item">
-                            <NuxtLink class="nav-link" to="/loots">
-                              <MaterialIcon name="treasure-chest" :size="24" /> Loots
-                            </NuxtLink>
-                        </li>
+                        <div class="ms-2 d-flex align-items-center">
+                          <NuxtLink class="text-decoration-none text-light nav-item" to="/settings">
+                            <MaterialIcon name="cog" :size="24" /> Settings
+                          </NuxtLink>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -73,9 +105,6 @@
             <a class="text-decoration-none text-light" href="https://github.com/BlossomiShymae/clean-cuts" referrerpolicy="no-referrer">
               <MaterialIcon name="github" :size="24" /> GitHub
             </a>
-            <NuxtLink class="text-decoration-none text-light" to="/settings">
-              <MaterialIcon name="earth" :size="24" /> Settings
-            </NuxtLink>
             <a class="text-decoration-none text-light" href="https://blossomishymae.github.io/" referrerpolicy="no-referrer">blossomishymae.github.io</a>
             <a class="text-decoration-none text-light" href="https://communitydragon.org" referrerpolicy="no-referrer">CommunityDragon</a>
             <!-- <a class="text-decoration-none text-light" href="https://discord.com/invite/riotgamesdevrel" referrerpolicy="no-referrer">DevRel Discord</a> -->
