@@ -60,6 +60,11 @@
                                   <MaterialIcon name="penguin" :size="24" /> Companions
                                 </NuxtLink>
                               </li>
+                              <li>
+                                <NuxtLink class="nav-link" to="/tft-items">
+                                  <MaterialIcon name="magic-staff" :size="24" /> Items
+                                </NuxtLink>
+                              </li>
                             </ul>
                           </div>
                         </li>
