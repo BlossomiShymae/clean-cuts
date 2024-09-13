@@ -348,3 +348,135 @@ export class Loot extends CommunityDragonObject {
     return this.resolveClientPath({path: this.image, args: {locale: "default", version: version}});
   }
 }
+
+export class CherryAugment extends CommunityDragonObject {
+  id: number;
+  nameTRA: string;
+  augmentSmallIconPath: string;
+  rarity: string;
+
+  constructor(json: any) {
+    super();
+
+    this.id = json.id;
+    this.nameTRA = json.nameTRA;
+    this.augmentSmallIconPath = json.augmentSmallIconPath;
+    this.rarity = json.rarity;
+  }
+
+  getAugmentSmallIcon(version: string): string {
+    return this.resolveGamePath({path: this.augmentSmallIconPath, version: version});
+  }
+}
+
+export class Universe extends CommunityDragonObject {
+  id: number;
+  name: string;
+  description: string;
+  skinSets: Array<number>;
+
+  constructor(json: any) {
+    super();
+
+    this.id = json.id;
+    this.name = json.name;
+    this.description = json.description;
+    this.skinSets = json.skinSets;
+  }
+}
+
+export class TftItem extends CommunityDragonObject {
+  guid: string;
+  name: string;
+  nameId: string;
+  id: number;
+  color: Color;
+  squareIconPath: string;
+
+  constructor(json: any) {
+    super();
+
+    this.guid = json.guid;
+    this.name = json.name;
+    this.nameId = json.nameId;
+    this.id = json.id;
+    this.color = new Color(json.color);
+    this.squareIconPath = json.squareIconPath;
+  }
+
+  getSquareIcon(version: string): string {
+    return this.resolveGamePath({path: this.squareIconPath, version: version});
+  }
+}
+
+export class Color extends CommunityDragonObject {
+  R: number;
+  B: number;
+  G: number;
+  A: number;
+
+  constructor(json: any) {
+    super();
+
+    this.R = json.R;
+    this.B = json.B;
+    this.G = json.G;
+    this.A = json.A;
+  }
+}
+
+export class TftMapSkin extends CommunityDragonObject {
+  contentId: string;
+  itemId: number;
+  name: string;
+  loadoutsIcon: string;
+  groupId: number;
+  groupName: string;
+  rarity: string;
+  rarityValue: number;
+
+  constructor(json: any) {
+    super();
+
+    this.contentId = json.contentId;
+    this.itemId = json.itemId;
+    this.name = json.name;
+    this.loadoutsIcon = json.loadoutsIcon;
+    this.groupId = json.groupId;
+    this.groupName = json.groupName;
+    this.rarity = json.rarity;
+    this.rarityValue = json.rarityValue;
+  }
+
+  getLoadoutsIcon(version: string): string {
+    return this.resolveGamePath({path: this.loadoutsIcon, version: version});
+  }
+}
+
+export class TftDamageSkin extends CommunityDragonObject {
+  contentId: string;
+  itemId: number;
+  name: string;
+  loadoutsIcon: string;
+  groupId: number;
+  rarity: string;
+  rarityValue: number;
+  level: number;
+
+  constructor(json: any) {
+    super();
+
+    this.contentId = json.contentId;
+    this.itemId = json.itemId;
+    this.name = json.name;
+    this.loadoutsIcon = json.loadoutsIcon;
+    this.groupId = json.groupId;
+    this.rarity = json.rarity;
+    this.rarityValue = json.rarityValue;
+    this.level = json.level;
+  }
+
+  getLoadoutsIcon(version: string): string {
+    return this.resolveGamePath({path: this.loadoutsIcon, version: version});
+  }
+}
