@@ -84,6 +84,10 @@ ul.dropdown-menu {
   backdrop-filter: blur(0.4rem);
 }
 
+.dropdown-menu {
+  width: 200px; 
+}
+
 .background {
   height: 100%;
   width: 100%;
