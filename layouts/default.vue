@@ -41,6 +41,11 @@
                                     <MaterialIcon name="floor-lamp" :size="24" /> Ward Skins
                                   </NuxtLink>
                                 </li>
+                                <li>
+                                  <NuxtLink class="nav-link" to="/cherry-augments">
+                                    <MaterialIcon name="dice-multiple-outline" :size="24" /> Cherry Augments
+                                  </NuxtLink>
+                                </li>
                               </ul>
                             </div>
                         </li>
