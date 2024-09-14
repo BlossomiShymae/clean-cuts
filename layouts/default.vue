@@ -70,6 +70,11 @@
                                   <MaterialIcon name="map" :size="24" /> Map Skins
                                 </NuxtLink>
                               </li>
+                              <li>
+                                <NuxtLink class="nav-link" to="/tft-damage-skins">
+                                  <MaterialIcon name="creation" :size="24" /> Damage Skins
+                                </NuxtLink>
+                              </li>
                             </ul>
                           </div>
                         </li>
