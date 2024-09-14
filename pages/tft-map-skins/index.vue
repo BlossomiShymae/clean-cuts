@@ -11,14 +11,17 @@
     :on-first="p.first" :on-last="p.last"/>
 
     <div class="d-flex flex-wrap justify-content-around gap-2">
-      <div class="card bg-transparent bg-screen border-light border-opacity-25" style="max-width: 140px; width: 140px;"
-        v-for="tftMapSkin in p.pages[p.index.value]" :key="tftMapSkin.itemId">
-        <img :src="tftMapSkin.getLoadoutsIcon('latest')" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
+      <div class="d-inline-flex align-items-stretch justify-content-stretch" v-for="tftMapSkin in p.pages[p.index.value]" :key="tftMapSkin.itemId">
+        <NuxtLink class="text-decoration-none" :to="`/tft-map-skins/overview/${tftMapSkin.itemId}`">
+          <div class="card h-100 bg-transparent bg-screen border-light border-opacity-25" style="max-width: 140px; width: 140px;">
+            <img :src="tftMapSkin.getLoadoutsIcon('latest')" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
 
-        <div class="card-body d-flex flex-column justify-content-end">
-          <h5 class="card-title">{{ tftMapSkin.name }}</h5>
-          <Badge name="identifier">{{ tftMapSkin.itemId }}</Badge>
-        </div>
+            <div class="card-body d-flex flex-column justify-content-end">
+              <h5 class="card-title">{{ tftMapSkin.name }}</h5>
+              <Badge name="identifier">{{ tftMapSkin.itemId }}</Badge>
+            </div>
+          </div>
+        </NuxtLink>
       </div>
     </div>
 

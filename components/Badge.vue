@@ -1,6 +1,8 @@
 <template>
-  <span class="badge text-bg-dark border text-dark-emphasis fw-normal d-flex align-items-center gap-2 bg-transparent bg-blur-4 border-light border-opacity-25">
-    <MaterialIcon :size="24" :name="name" />
+  <span class="badge text-bg-dark border text-dark-emphasis fw-normal d-flex align-items-center gap-2 bg-transparent bg-blur-4 border-light border-opacity-25"
+    style="min-height: 32px;">
+    <span class="fw-bold" v-if="label">{{ label }}</span>
+    <MaterialIcon v-if="name" :size="24" :name="name" />
     <slot></slot>
   </span>
 </template>
@@ -9,7 +11,8 @@
 import MaterialIcon from './MaterialIcon.vue';
 
 defineProps<{
-  name: string
+  name?: string;
+  label?: string;
 }>();
 </script>
 
