@@ -1,4 +1,4 @@
-import { Champion, ChampionSummary, Item, LocaleVersionArgs, Perk, SummonerEmote, SummonerIcon, WardSkin, Companion, Loot, CherryAugment, Universe, TftItem, TftMapSkin, TftDamageSkin } from './models';
+import { Champion, ChampionSummary, Item, LocaleVersionArgs, Perk, SummonerEmote, SummonerIcon, WardSkin, Companion, Loot, CherryAugment, Universe, TftItem, TftMapSkin, TftDamageSkin, Skin } from './models';
 import axios from "axios";
 
 export abstract class ApiObject {
@@ -24,6 +24,7 @@ export class Client {
   public tftItems: TftItemApi;
   public tftMapSkins: TftMapSkinApi;
   public tftDamageSkins: TftDamageSkinApi;
+  public skins: SkinApi;
 
   constructor() {
     this.items = new ItemApi();
@@ -40,6 +41,7 @@ export class Client {
     this.tftItems = new TftItemApi();
     this.tftMapSkins = new TftMapSkinApi();
     this.tftDamageSkins = new TftDamageSkinApi();
+    this.skins = new SkinApi();
   }
 }
 
@@ -138,5 +140,12 @@ export class TftDamageSkinApi extends ApiObject {
   async listAsync(args: LocaleVersionArgs): Promise<Array<TftDamageSkin>> {
     let res = await axios.get(`${this.getClientPath(args)}/v1/tftdamageskins.json`);
     return res.data.map((x: any) => new TftDamageSkin(x));
+  }
+}
+
+export class SkinApi extends ApiObject {
+  async listAsync(args: LocaleVersionArgs): Promise<Array<Skin>> {
+    let res = await axios.get(`${this.getClientPath(args)}/v1/skins.json`);
+    return Object.entries(res.data).map(([key, value]) => new Skin(value));
   }
 }

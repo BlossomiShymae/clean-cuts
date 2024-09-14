@@ -74,6 +74,12 @@ export class Skin extends CommunityDragonObject {
   rarity: string;
   isLegacy: boolean;
   loadScreenPath: string;
+  splashPath: string;
+  uncenteredSplashPath: string;
+  tilePath: string;
+  description?: string;
+  skinLines?: Array<SkinLine>;
+
 
   constructor(json: any) {
     super();
@@ -84,10 +90,37 @@ export class Skin extends CommunityDragonObject {
     this.rarity = json.rarity;
     this.isLegacy = json.isLegacy;
     this.loadScreenPath = json.loadScreenPath;
+    this.splashPath = json.splashPath;
+    this.uncenteredSplashPath = json.uncenteredSplashPath;
+    this.tilePath = json.tilePath;
+    this.description = json.description;
+    this.skinLines = json.skinLines?.map((x: any) => new SkinLine(x)) ?? null;
   }
 
   getLoadScreen(version: string): string {
     return this.resolveGamePath({path: this.loadScreenPath, version: version});
+  }
+
+  getSplash(args: LocaleVersionArgs): string {
+    return this.resolveClientPath({path: this.splashPath, args: args});
+  }
+
+  getUncenteredSplash(args: LocaleVersionArgs): string {
+    return this.resolveClientPath({path: this.uncenteredSplashPath, args: args});
+  }
+
+  getTile(args: LocaleVersionArgs): string {
+    return this.resolveClientPath({path: this.tilePath, args: args});
+  }
+}
+
+export class SkinLine extends CommunityDragonObject {
+  id: number;
+
+  constructor(json: any) {
+    super();
+
+    this.id = json.id;
   }
 }
 

@@ -27,7 +27,9 @@
       <div class="col-md-6 col-sm-12">
           <div class="d-flex justify-content-between mb-2">
               <div style="min-height: 560px; min-width: 308px;" id="champion-loading-screen">
-                  <img class="border border-light border-opacity-25 rounded" :src="currentSkin" loading="lazy" />
+                  <NuxtLink class="text-decoration-none" :to="`/skins/overview/${currentSkin.id}`">
+                    <img class="border border-light border-opacity-25 rounded" :src="currentSkin.getLoadScreen('latest')" loading="lazy" />
+                  </NuxtLink>
               </div>
               <div class="d-flex flex-row flex-wrap align-items-center gap-2 border-start border-5 border-light border-opacity-10 ms-0 ps-2">
                 <button class="btn btn-dark flex-grow-1 border-light border-opacity-25 bg-transparent bg-blur-3"
@@ -50,6 +52,7 @@ import Badge from '~/components/Badge.vue';
 import { useRoute } from 'vue-router';
 import useClient from '../../../composables/useClient';
 import useLocale from '~/composables/useLocale';
+import { Skin } from '../../../core/models';
 
 const route = useRoute();
 const id = route.params.id as unknown;
@@ -63,8 +66,8 @@ watch(currentLocale, async () => {
   champion.value = await getChampion();
 });
 
-const currentSkin = ref(champion.value.skins[0].getLoadScreen('latest'));
+const currentSkin = ref(champion.value.skins[0]);
 const swapLoadScreen = (id: number) => {
-    currentSkin.value = champion.value.skins.find((x) => x.id == id)?.getLoadScreen('latest') as string;
+    currentSkin.value = champion.value.skins.find((x) => x.id == id) as Skin;
 }
 </script>
