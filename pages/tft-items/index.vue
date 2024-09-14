@@ -15,9 +15,7 @@
         <tbody>
           <tr v-for="tftItem in tftItems" :key="tftItem.guid" style="postion: relative;">
             <th scope="row">
-              <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/tft-items/overview/${tftItem.guid}`">
-                {{ tftItem.guid }}
-              </NuxtLink>
+              <span class="text-decoration-none text-light fw-normal">{{ tftItem.guid }}</span>
             </th>
             <th scope="row">
               <img class="rounded" :src="tftItem.getSquareIcon('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src = '/clean-cuts/img/error.png'"/>
@@ -26,7 +24,7 @@
               <span class="text-decoration-none text-light fw-normal">{{ tftItem.name }}</span>
             </th>
             <th scope="row">
-              {{ tftItem.nameId }}
+              <span class="text-decoration-none text-light fw-normal">{{ tftItem.nameId }}</span>
             </th>
           </tr>
         </tbody>

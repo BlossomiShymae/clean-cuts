@@ -37,7 +37,8 @@ import usePagination from '~/composables/usePagination';
 
 const { client } = useClient();
 const { currentLocale } = useLocale();
-const getTftDamageSkins = async () => (await client.tftDamageSkins.listAsync({ locale: currentLocale.value, version: "latest"}));
+const getTftDamageSkins = async () => (await client.tftDamageSkins.listAsync({ locale: currentLocale.value, version: "latest"}))
+  .sort((a, b) => a.itemId - b.itemId);
 
 const query = ref("");
 
