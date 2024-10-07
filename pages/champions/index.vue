@@ -1,51 +1,40 @@
-<template>
-  <div class="d-flex flex-column gap-2">
-      <h1>Champions</h1>
-
-      <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
-          <table class="sortable table table-borderless">
-          <thead>
-              <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Icon</th>
-                  <th scope="col">Name</th>
-              </tr>
-          </thead>
-          <tbody>
-            <tr v-for="summary in summaries" :key="summary.id" style="position: relative;">
-                <th scope="row">
-                    <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/champions/overview/${summary.id}`">
-                        {{ summary.id }}
-                    </NuxtLink>
-                </th>
-                <td>
-                    <NuxtLink :to="`/champions/overview/${summary.id}`">
-                        <img :src="summary.getIcon({locale: 'default', version: 'latest'})" width="32px" height="32px" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png'"/>
-                    </NuxtLink>
-                </td>
-                <td>
-                    <NuxtLink class="text-decoration-none text-light" :to="`/champions/overview/${summary.id}`">
-                        {{ summary.name }}
-                    </NuxtLink>
-                </td>
-            </tr>
-          </tbody>
-      </table>
-      </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import useClient from '../../composables/useClient';
-import useLocale from "../../composables/useLocale";
-
 const { client } = useClient();
 const { currentLocale } = useLocale();
 const getSummaries = async () => (await client.championSummaries.listAsync({locale: currentLocale.value, version: "latest"}))
-.filter((x) => x.id != -1);
+    .filter((x) => x.id != -1) // Remove placeholder champion
+    .sort((a, b) => a.name.localeCompare(b.name));
+const getSkins = async () => await client.skins.listAsync({locale: currentLocale.value, version: "latest"});
 
 const summaries = ref(await getSummaries());
+const skins = ref(await getSkins());
 watch(currentLocale, async () => {
     summaries.value = await getSummaries();
+    skins.value = await getSkins();
 });
 </script>
+
+<template>
+  <div class="d-flex flex-column gap-2">
+      <div class="d-flex flex-row flex-wrap gap-4">
+        <div v-for="summary in summaries" :id="`${summary.id}`" 
+            style="width: 200px;"
+            data-aos="zoom-out"
+            data-aos-duration="500">
+            <NuxtLink :to="`/champions/overview/${summary.id}`">
+                <div class="ratio ratio-16x9 position-relative">
+                    <img class="object-fit-cover rounded" 
+                        :src="skins.find(x => (x.id / 1000) == summary.id)?.getTile({locale: currentLocale, version: 'latest'})"
+                        loading="lazy"/>
+                    <div class="position-absolute z-1 d-flex flex-column justify-content-end">
+                        <div class="d-inline-flex justify-content-between align-items-center px-2" style="background: #0008;">
+                            <span class="fs-5 fw-light">{{ summary.name }}</span>
+                            <span class="fw-bold">{{ summary.id }}</span>
+                        </div>
+                    </div>
+                </div>
+            </NuxtLink>
+        </div>
+      </div>
+  </div>
+</template>
