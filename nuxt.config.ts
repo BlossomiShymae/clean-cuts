@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         "data-bs-theme": "dark",
-        "style": "background-image: url('https://raw.communitydragon.org/14.9/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/498/498000.jpg');"
+        "style": "background-image: url('/clean-cuts/img/background.jpg');"
       },
       bodyAttrs: {
         class: "h-100"
@@ -35,10 +35,6 @@ export default defineNuxtConfig({
           integrity:
             "sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM",
           crossorigin: "anonymous",
-        },
-        {
-          rel: "stylesheet",
-          href: "/clean-cuts/css/app.css",
         },
         {
           rel: "icon",
