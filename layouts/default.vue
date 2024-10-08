@@ -1,4 +1,3 @@
-
 <template>
   <div class="h-100">
     <header class="container">

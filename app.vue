@@ -1,5 +1,5 @@
 <template>
-  <NuxtLoadingIndicator />
+  <NuxtLoadingIndicator color="#FBDCFB"/>
   <NuxtLayout>
     <NuxtPage keepalive />
   </NuxtLayout>
@@ -12,7 +12,11 @@ import "aos/dist/aos.css";
 AOS.init();
 </script>
 
-<style>
+<style lang="scss">
+.app-background { 
+  background: rgba(41, 31, 68, 0.875);
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.2s;
@@ -49,16 +53,6 @@ html {
 
   position: relative;
   z-index: 0;
-}
-
-html::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
 }
 
 body {
@@ -104,8 +98,7 @@ table > tbody > tr:hover > * {
 }
 
 ul.dropdown-menu {
-  background: transparent;
-  backdrop-filter: blur(0.4rem);
+  @extend .app-background
 }
 
 .dropdown-menu {
@@ -117,44 +110,6 @@ ul.dropdown-menu {
   width: 100%;
 
   position: absolute;
-}
-
-.background-screen {
-  background-color: #0008;
-  z-index: -1;
-}
-
-.bg-screen {
-  background-color: #0004 !important;
-}
-
-.background-transparent {
-  background-color: transparent;
-  z-index: -1;
-}
-
-.background-blur {
-  backdrop-filter: blur(0.2rem);
-}
-
-.bg-blur {
-  backdrop-filter: blur(0.2rem);
-}
-
-.background-blur-2 {
-  backdrop-filter: blur(0.4rem);
-}
-
-.bg-blur-2 {
-  backdrop-filter: blur(0.4rem);
-}
-
-.bg-blur-3 {
-  backdrop-filter: blur(0.6rem);
-}
-
-.bg-blur-4 {
-  backdrop-filter: blur(0.8rem);
 }
 
 .z-index--10 {
