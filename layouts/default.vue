@@ -1,3 +1,20 @@
+<script setup lang="ts">
+const route = useRoute();
+const breadcrumbs = computed(() => {
+  const names = route.fullPath.split("/").filter(x => x != "");
+  let _breadcrumbs = [];
+  let stack = "";
+  for (const name of names) {
+    stack += "/" + name;
+    _breadcrumbs.push({
+      name: name,
+      path: stack
+    });
+  }
+  return _breadcrumbs;
+});
+</script>
+
 <template>
   <div class="h-100">
     <header class="container">
@@ -108,6 +125,11 @@
                 </ul>
             </div>
           </nav>
+          <nav v-if="breadcrumbs.length > 0" style="--bs-breadcrumb-divider: '|';">
+              <ol class="breadcrumb pb-0 mb-0 border-top border-light border-opacity-25">
+                <li class="breadcrumb-item" v-for="breadcrumb in breadcrumbs"><NuxtLink :to="breadcrumb.path" class="text-decoration-none text-light" style="text-transform: capitalize;">{{ breadcrumb.name }}</NuxtLink></li>
+              </ol>
+            </nav>
         </Card>
     </header>
     <div class="container">
@@ -116,7 +138,7 @@
         </main>
     </div>
 
-    <footer class="container">
+    <footer class="container mb-4">
         <Card>
           <div class="d-flex justify-content-around align-items-center gap-2 mb-3 flex-wrap">
               <NuxtLink class="text-decoration-none text-light" to="/about">About</NuxtLink>
