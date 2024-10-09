@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Skin } from '~/core/models';
+
 const route = useRoute();
 const id = route.params.id as unknown;
 
@@ -65,7 +67,7 @@ const swapCurrentSkin = (id: number) => {
           </div>
         </div>
         <div>
-          <h5 class="text-light"><span class="fw-bold me-2">i</span> {{ champion.passive.name}}</h5>
+          <h5 class="text-light"><span class="fw-bold me-2 text-uppercase">p</span> {{ champion.passive.name}}</h5>
           <small v-html="champion.passive.description"></small>
         </div>
       </div>
@@ -77,7 +79,7 @@ const swapCurrentSkin = (id: number) => {
             </div>
           </div>
           <div>
-            <h5 class="text-light"><span class="fw-bold me-2">{{ spell.spellKey }}</span> {{ spell.name }}</h5>
+            <h5 class="text-light"><span class="fw-bold me-2 text-uppercase">{{ spell.spellKey }}</span> {{ spell.name }}</h5>
             <small v-html="spell.description"></small>
           </div>
       </div>
