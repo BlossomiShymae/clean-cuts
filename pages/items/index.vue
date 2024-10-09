@@ -1,50 +1,4 @@
-<template>
-  <div class="d-flex flex-column gap-2">
-      <h1>Items</h1>
-
-      <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
-          <table class="sortable table table-borderless">
-              <thead>
-                  <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Icon</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Price</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in items" :key="item.id" style="position: relative;">
-                    <th scope="row">
-                        <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/items/overview/${item.id}`">
-                            {{ item.id }}
-                        </NuxtLink>
-                    </th>
-                    <td>
-                        <NuxtLink class="text-decoration-none text-light" :to="`/items/overview/${item.id}`">
-                            <img class="rounded" :src="item.getIcon('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src = '/clean-cuts/img/error.png'"/>
-                        </NuxtLink>
-                    </td>
-                    <td>
-                        <NuxtLink class="text-decoration-none text-light" :to="`/items/overview/${item.id}`">
-                            <span v-html="item.name"></span>
-                        </NuxtLink>
-                    </td>
-                    <td>
-                        <NuxtLink class="text-decoration-none text-light" :to="`/items/overview/${item.id}`">
-                            {{ item.priceTotal }}
-                        </NuxtLink>
-                    </td>
-                </tr>
-              </tbody>
-          </table>
-      </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import useClient from '../../composables/useClient';
-import useLocale from '~/composables/useLocale';
-
 const { client } = useClient();
 const { currentLocale } = useLocale();
 const getItems = async () => await client.items.listAsync({ locale: currentLocale.value, version: "latest"});
@@ -54,3 +8,23 @@ watch(currentLocale, async () => {
     items.value = await getItems();
 });
 </script>
+
+<template>
+  <div class="d-flex flex-row flex-wrap gap-2 justify-content-center">
+    <div v-for="item in items" :id="`${item.id}`"
+        style="width: 64px;"
+        data-aos="zoom-out"
+        data-aos-duration="500">
+        <NuxtLink :to="`/items/${item.id}`">
+            <div class="ratio ratio-1x1 position-relative">
+                <img class="rounded" :src="item.getIcon('latest')" loading="lazy"/>
+                <div class="position-absolute z-1 d-flex flex-column justify-content-end">
+                    <div class="d-inline-flex justify-content-end align-items-center">
+                        <span class="fw-bold bg-dark-subtle rounded m-1" style="font-size: 8pt; padding: 1px;">{{ item.id }}</span>
+                    </div>
+                </div>
+            </div>
+        </NuxtLink>
+    </div>
+  </div>
+</template>

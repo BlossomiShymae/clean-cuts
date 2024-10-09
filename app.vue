@@ -131,4 +131,28 @@ ul.dropdown-menu {
 .z-index-10 {
   z-index: 10;
 }
+
+.tf-custom .tf-nc {
+  border-color: transparent;
+}
+
+.tf-custom .tf-nc:before,
+.tf-custom .tf-nc:after {
+  border-left-color: #FBDCFB;
+  border-left-width: 2px;
+}
+
+.tf-custom li li:before {
+  border-top-color: #FBDCFB;
+  border-top-width: 2px;
+}
+
+.tf-ancestor-tree { position: relative; }
+.tf-ancestor-tree > ul { transform: rotateX(180deg); }
+.tf-ancestor-tree li ul { margin-bottom: 1em; }
+
+.node-text {
+  display: inline-block;
+  transform: rotateX(180deg);
+}
 </style>

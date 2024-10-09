@@ -37,6 +37,10 @@ export default defineNuxtConfig({
           crossorigin: "anonymous",
         },
         {
+          rel: "stylesheet",
+          href: "https://unpkg.com/treeflex/dist/css/treeflex.css"
+        },
+        {
           rel: "icon",
           type: "image/png",
           href: "/clean-cuts/favicon.png",
