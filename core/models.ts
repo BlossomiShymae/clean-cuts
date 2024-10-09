@@ -126,19 +126,26 @@ export class SkinLine extends CommunityDragonObject {
 
 export class Passive extends CommunityDragonObject {
   name: string;
+  abilityIconPath: string;
   description: string;
 
   constructor(json: any) {
     super();
 
     this.name = json.name;
+    this.abilityIconPath = json.abilityIconPath;
     this.description = json.description;
+  }
+
+  getAbilityIcon(version: string): string {
+    return this.resolveGamePath({ path: this.abilityIconPath, version: version});
   }
 }
 
 export class Spell extends CommunityDragonObject {
   spellKey: string;
   name: string;
+  abilityIconPath: string;
   description: string;
 
   constructor(json: any) {
@@ -146,7 +153,12 @@ export class Spell extends CommunityDragonObject {
 
     this.spellKey = json.spellKey;
     this.name = json.name;
+    this.abilityIconPath = json.abilityIconPath;
     this.description = json.description;
+  }
+
+  getAbilityIcon(version: string): string {
+    return this.resolveGamePath({ path: this.abilityIconPath, version: version});
   }
 }
 

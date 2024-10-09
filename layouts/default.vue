@@ -17,7 +17,7 @@ const breadcrumbs = computed(() => {
 
 <template>
   <div class="h-100">
-    <header class="container">
+    <header class="container-fluid">
         <Card>
           <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light m-0 p-0">
             <NuxtLink class="navbar-brand fw-light" to="/" >
@@ -132,13 +132,13 @@ const breadcrumbs = computed(() => {
             </nav>
         </Card>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pt-3 pb-3">
             <slot></slot>
         </main>
     </div>
 
-    <footer class="container mb-4">
+    <footer class="container-fluid mb-4">
         <Card>
           <div class="d-flex justify-content-around align-items-center gap-2 mb-3 flex-wrap">
               <NuxtLink class="text-decoration-none text-light" to="/about">About</NuxtLink>

@@ -14,7 +14,15 @@ AOS.init();
 
 <style lang="scss">
 .app-background { 
-  background: rgba(41, 31, 68, 0.875);
+  background: rgba(41, 31, 68, 0.9);
+}
+
+.app-background-solid {
+  background: rgb(41, 31, 68);
+}
+
+.aos-fix[data-aos][data-aos].aos-animate {
+    transform: unset;
 }
 
 .page-enter-active,
@@ -98,7 +106,11 @@ table > tbody > tr:hover > * {
 }
 
 ul.dropdown-menu {
-  @extend .app-background
+  @extend .app-background-solid;
+}
+
+.list-group-item {
+  @extend .app-background;
 }
 
 .dropdown-menu {

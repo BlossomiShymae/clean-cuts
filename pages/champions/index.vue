@@ -21,7 +21,7 @@ watch(currentLocale, async () => {
             style="width: 200px;"
             data-aos="zoom-out"
             data-aos-duration="500">
-            <NuxtLink :to="`/champions/overview/${summary.id}`">
+            <NuxtLink :to="`/champions/${summary.id}`">
                 <div class="ratio ratio-16x9 position-relative">
                     <img class="object-fit-cover rounded" 
                         :src="skins.find(x => (x.id / 1000) == summary.id)?.getTile({locale: currentLocale, version: 'latest'})"
