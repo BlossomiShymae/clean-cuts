@@ -90,7 +90,7 @@ svg {
 }
 
 table {
-  background-color: #0004 !important;
+  @extend .app-background-solid;
 }
 
 thead, tbody, th, td {
@@ -101,9 +101,6 @@ table > tbody > tr:nth-of-type(2n+1) > * {
   background-color: #0004 !important;
 }
 
-table > tbody > tr:hover > * {
-  background-color: #0008 !important;
-}
 
 ul.dropdown-menu {
   @extend .app-background-solid;

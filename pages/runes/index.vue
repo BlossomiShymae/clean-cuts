@@ -1,8 +1,6 @@
 <template>
   <div class="d-flex flex-column gap-2">
-      <h1>Runes</h1>
-
-      <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
+      <div class="overflow-hidden rounded border border-light border-opacity-25 p-4 app-background-solid">
           <table class="sortable table table-borderless">
               <thead>
                   <tr>
