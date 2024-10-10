@@ -31,7 +31,7 @@ const rarities = {
 
 <template>
   <div class="d-flex flex-column gap-2">
-      <div class="d-flex gap-4 justify-content-end">
+      <div class="d-flex gap-2 justify-content-end">
         <Card class="d-flex justify-content-center align-items-center me-auto">
             <span>{{ skins.length }} skins</span>
         </Card>

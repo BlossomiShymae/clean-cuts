@@ -1,38 +1,4 @@
-<template>
-  <div class="d-flex flex-column gap-2">
-    <h1 class="mb-3">Cherry Augments</h1>
-
-    <div class="input-group">
-      <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
-        v-model="query"/>
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last"/>
-
-    <div class="d-flex flex-wrap justify-content-around gap-2">
-      <div class="card bg-transparent bg-screen border-light border-opacity-25" style="max-width: 140px; width: 140px;"
-        v-for="cherryAugment in p.pages[p.index.value]" :key="cherryAugment.id">
-        <img :src="cherryAugment.getAugmentSmallIcon('latest')" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png'" />
-
-        <div class="card-body d-flex flex-column justify-content-end">
-            <h5 class="card-title">{{ cherryAugment.nameTRA }}</h5>
-            <Badge name="identifier">{{ cherryAugment.id }}</Badge>
-        </div>
-      </div>
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-    :on-first="p.first" :on-last="p.last"/>
-  </div>
-</template>
-
 <script setup lang="ts">
-import useClient from '~/composables/useClient';
-import useLocale from '~/composables/useLocale';
-import useisNumeric from '~/composables/useIsNumeric';
-import usePagination from '~/composables/usePagination';
-
 const { client } = useClient();
 const { currentLocale } = useLocale();
 const getCherryAugments = async () => (await client.cherryAugments.listAsync({locale: currentLocale.value, version: "latest"}))
@@ -46,12 +12,43 @@ watch (currentLocale, async() => {
 });
 
 const { isNumeric } = useIsNumeric();
-const p = computed(() => {
+const filteredCherryAugments = computed(() => {
   let filtered = [];
   if (isNumeric(query.value))
     filtered = cherryAugments.value.filter((x) => x.id == parseInt(query.value, 10));
   else
     filtered = cherryAugments.value.filter((x) => x.nameTRA.toLowerCase().includes(query.value.toLowerCase()));
-  return usePagination(filtered, 24);
+  return filtered;
 })
 </script>
+
+<template>
+  <div class="d-flex flex-column gap-2">
+    <div class="d-flex flex-row justify-content-end gap-2">
+      <Card class="d-flex justify-content-center align-items-center me-auto">
+        <span>{{ cherryAugments.length }} augments</span>
+      </Card>
+      <div class="input-group" style="max-width: 400px;">
+        <input type="text" class="form-control border-light border-opacity-25" placeholder="Search" name="Search"
+          v-model="query"/>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-around gap-2">
+      <div v-for="cherryAugment in filteredCherryAugments" :id="`${cherryAugment.id}-${cherryAugment.nameTRA}`"
+        style="width: 200px;"
+        data-aos="zoom-out"
+        data-aos-duration="500">
+        <div class="ratio ratio-1x1 position-relative">
+          <img class="rounded app-background p-4" :src="cherryAugment.getAugmentSmallIcon('latest')" loading="lazy"/>
+          <div class="position-absolute z-1 d-flex flex-column justify-content-end">
+            <div class="d-inline-flex justify-content-between align-items-center p-1" style="background: #0008;" >
+              <span class="fs-6 fw-light ">{{ cherryAugment.nameTRA }}</span>
+              <span class="fw-bold rounded">{{ cherryAugment.id }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
