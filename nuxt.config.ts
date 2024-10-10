@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
+
   app: {
     baseURL: "/clean-cuts/",
     pageTransition: {
@@ -56,7 +57,10 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   experimental: {
     payloadExtraction: false,
   },
+
+  compatibilityDate: "2024-10-09",
 })

@@ -114,6 +114,10 @@ ul.dropdown-menu {
   width: 200px; 
 }
 
+.form-control {
+  @extend .app-background;
+}
+
 .background {
   height: 100%;
   width: 100%;
