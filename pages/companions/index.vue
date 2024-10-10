@@ -1,59 +1,4 @@
-<template>
-  <div class="d-flex flex-column gap-2">
-    <h1>Companions</h1>
-
-    <div class="input-group">
-      <input type="text" class="form-control bg-transparent border-light border-opacity-25"
-        placeholder="Search" name="Search" v-model="query" />
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-      :on-first="p.first" :on-last="p.last"/>
-
-    <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
-      <table class="sortable table table-borderless">
-        <thead>
-          <tr>
-            <th scope="col">Item Id</th>
-            <th scope="col">Icon</th>
-            <th scope="col">Name</th>
-            <th scope="col">Species ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="companion in p.pages[p.index.value]" :key="companion.contentId" style="position: relative;">
-            <td scope="row">
-              <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/companions/overview/${companion.itemId}`">
-                {{ companion.itemId }}
-              </NuxtLink>
-            </td>
-            <td>
-              <img :src="companion.getLoadoutsIcon('latest')" height="48px" loading="lazy"
-              onerror="this.onerror = null; this.src='/clean-cuts/img/error.png'" />
-            </td>
-            <td>
-              {{ companion.name }}
-            </td>
-            <td>
-              {{ companion.speciesId }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-      :on-first="p.first" :on-last="p.last"/>
-  </div>
-</template>
-
 <script setup lang="ts">
-import Pagination from "../../components/Pagination.vue";
-import useClient from "../../composables/useClient";
-import useLocale from "~/composables/useLocale";
-import useIsNumeric from "../../composables/useIsNumeric";
-import usePagination from "../../composables/usePagination";
-
 const { client } = useClient();
 const { currentLocale } = useLocale();
 const getCompanions = async () => (await client.companions.listAsync({locale: currentLocale.value, version: "latest"}))
@@ -77,3 +22,40 @@ const p = computed(() => {
   return usePagination(filtered, 100);
 })
 </script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div class="d-flex flex-wrap gap-2 justify-content-end">
+      <Card class="d-flex justify-content-center align-items-center me-auto">
+        <span>{{ companions.length }} companions</span>
+      </Card>
+
+      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
+        :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
+
+      <div class="input-group" style="max-width: 400px;">
+        <input type="text" class="form-control border-light border-opacity-25"
+          placeholder="Search" name="Search" v-model="query" />
+      </div>
+    </div>
+
+    <div class="d-flex flex-row flex-wrap justify-content-center gap-4">
+      <div style="width: 350px;" v-for="companion in p.pages[p.index.value]"
+        data-aos="zoom-out"
+        data-aos-duration="500">
+        <div class="ratio ratio-16x9 position-relative">
+          <img class="object-fit-cover rounded" :src="companion.getLoadoutsIcon('latest')" loading="lazy" />
+          <div class="position-absolute z-1 d-flex flex-column justify-content-end">
+            <div class="d-inline-flex justify-content-between align-items-center p-2 bg-dark-gradient rounded">
+              <span class="fs-6">{{ companion.name }}</span>
+              <span class="fw-bold">{{ companion.itemId }}</span>
+            </div>
+          </div>
+          <div class="position-absolute z-2 d-flex flex-column justify-content-start align-items-end">
+            <span v-if="companion.rarity != 'Default'" class="rounded px-1 m-1" style="background: #0008; padding: 1px;">{{ companion.rarity }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

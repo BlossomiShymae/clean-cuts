@@ -153,4 +153,8 @@ ul.dropdown-menu {
   display: inline-block;
   transform: rotateX(180deg);
 }
+
+.bg-dark-gradient {
+  background: linear-gradient(0deg, #000, transparent),linear-gradient(0deg, #000, transparent);
+}
 </style>
