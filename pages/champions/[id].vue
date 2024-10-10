@@ -48,6 +48,7 @@ const swapCurrentSkin = (id: number) => {
           <div class="d-flex flex-wrap gap-3 mb-3">
             <Badge label="ID">{{ champion.id }}</Badge>
             <Badge label="Key">{{ champion.alias }}</Badge>
+            <Badge label="Total Skins">{{ champion.skins.length - 1 }}</Badge>
             <Badge label="Damage">{{ champion.playstyleInfo.damage }}</Badge>
             <Badge label="Durability">{{ champion.playstyleInfo.durability }}</Badge>
             <Badge label="Crowd Control">{{ champion.playstyleInfo.crowdControl }}</Badge>
