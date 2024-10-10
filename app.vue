@@ -14,11 +14,7 @@ AOS.init();
 
 <style lang="scss">
 .app-background { 
-  background: rgba(41, 31, 68, 0.9);
-}
-
-.app-background-solid {
-  background: rgb(41, 31, 68);
+  background: rgba(41, 31, 68, 1);
 }
 
 .aos-fix[data-aos][data-aos].aos-animate {
@@ -61,6 +57,7 @@ html {
 
   position: relative;
   z-index: 0;
+  transition: all 1s ease-out;
 }
 
 body {
@@ -90,7 +87,7 @@ svg {
 }
 
 table {
-  @extend .app-background-solid;
+  @extend .app-background;
 }
 
 thead, tbody, th, td {
@@ -103,7 +100,7 @@ table > tbody > tr:nth-of-type(2n+1) > * {
 
 
 ul.dropdown-menu {
-  @extend .app-background-solid;
+  @extend .app-background;
 }
 
 .list-group-item {

@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
-
   app: {
     baseURL: "/clean-cuts/",
     pageTransition: {
@@ -16,7 +15,6 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         "data-bs-theme": "dark",
-        "style": "background-image: url('/clean-cuts/img/background.jpg');"
       },
       bodyAttrs: {
         class: "h-100"
