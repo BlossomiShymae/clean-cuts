@@ -1,43 +1,4 @@
-<template>
-  <div class="d-flex flex-column gap-2">
-    <h1 class="mb-3">TFT Map Skins</h1>
-
-    <div class="input-group">
-      <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
-        v-model="query"/>
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-    :on-first="p.first" :on-last="p.last"/>
-
-    <div class="d-flex flex-wrap justify-content-around gap-2">
-      <div class="d-inline-flex align-items-stretch justify-content-stretch" v-for="tftMapSkin in p.pages[p.index.value]" :key="tftMapSkin.itemId">
-        <NuxtLink class="text-decoration-none" :to="`/tft-map-skins/overview/${tftMapSkin.itemId}`">
-          <div class="card h-100 bg-transparent bg-screen border-light border-opacity-25" style="max-width: 140px; width: 140px;">
-            <img :src="tftMapSkin.getLoadoutsIcon('latest')" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
-
-            <div class="card-body d-flex flex-column justify-content-end">
-              <h5 class="card-title">{{ tftMapSkin.name }}</h5>
-              <Badge name="identifier">{{ tftMapSkin.itemId }}</Badge>
-            </div>
-          </div>
-        </NuxtLink>
-      </div>
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last"/>
-  </div>
-</template>
-
 <script setup lang="ts">
-import Pagination from '~/components/Pagination.vue';
-import Badge from '~/components/Badge.vue';
-import useClient from '~/composables/useClient';
-import useLocale from '~/composables/useLocale';
-import useIsNumeric from '~/composables/useIsNumeric';
-import usePagination from '~/composables/usePagination';
-
 const { client } = useClient();
 const { currentLocale } = useLocale();
 const getTftMapSkins = async () => (await client.tftMapSkins.listAsync({ locale: currentLocale.value, version: "latest"}))
@@ -57,6 +18,41 @@ const p = computed(() => {
     filtered = tftMapSkins.value.filter((x) => x.itemId == parseInt(query.value));
   else
     filtered = tftMapSkins.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
-  return usePagination(filtered, 24);
+  return filtered;
 })
 </script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div class="d-flex flex-wrap justify-content-end gap-2">
+      <Card class="d-flex justify-content-center align-items-center me-auto">
+        <span>{{ tftMapSkins.length }} TFT map skins</span>
+      </Card>
+      <div class="input-group" style="max-width: 400px;">
+        <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
+          v-model="query"/>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+      <div style="width: 350px;" v-for="tftMapSkin in tftMapSkins" :id="`${tftMapSkin.itemId}`"
+        data-aos="zoom-out"
+        data-aos-duration="500">
+        <div class="ratio ratio-4x3 position-relative">
+          <img class="object-fit-cover rounded" :src="tftMapSkin.getLoadoutsIcon('latest')" loading="lazy"/>
+          <div class="position-absolute z-1 d-flex flex-column justify-content-end">
+            <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient p-2 rounded">
+              <div class="d-flex flex-column">
+                <span>{{ tftMapSkin.name }}</span>
+                <span class="text-muted">{{ tftMapSkin.groupName }}</span>
+              </div>
+              <span>{{ tftMapSkin.itemId }}</span>
+            </div>
+          </div>
+          <div class="position-absolute z-2 d-flex flex-column justify-content-start align-items-end">
+            <span v-if="tftMapSkin.rarity != 'Default'" class="rounded px-1 m-1" style="background: #0008; padding: 1px;">{{ tftMapSkin.rarity }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
