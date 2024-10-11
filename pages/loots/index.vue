@@ -1,49 +1,4 @@
-<template>  
-  <div class="d-flex flex-column gap-2">
-    <h1>Loots</h1>
-
-    <div class="btn-group flex-wrap gap-2">
-      <a class="btn btn-outline-dark" @click="clearFilter()">
-        <MaterialIcon name="backspace-outline" :size="24" />
-      </a>
-      <a class="btn btn-outline-dark text-light" v-for="category in categories" @click="applyFilter(category)">
-        {{ category }}
-      </a>
-    </div>
-
-    <div class="input-group">
-      <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
-        v-model="query"/>
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-    :on-first="p.first" :on-last="p.last"/>
-
-    <div class="d-flex flex-wrap justify-content-around gap-2">
-      <div class="card bg-transparent bg-screen border-light border-opacity-25" style="max-width: 180px; width: 180px;"
-        v-for="loot in p.pages[p.index.value]" :key="loot.id">
-        <img :src="getLootImage(loot)" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png';" />
-
-        <div class="card-body d-flex flex-column justify-content-end">
-          <h5>{{ loot.name }}</h5>
-          <span class="small pb-2 mb-2">{{ loot.id }}</span>
-            <img v-if="loot.rarity != 'Default'" :src="`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-parties/global/default/${loot.rarity.toLowerCase()}_plating_big.png`" />
-        </div>
-      </div>
-    </div>
-
-    <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last"/>
-  </div>
-</template>
-
 <script setup lang="ts">
-import MaterialIcon from '../../components/MaterialIcon.vue';
-import Pagination from "../../components/Pagination.vue";
-import useClient from '../../composables/useClient';
-import useLocale from '~/composables/useLocale';
-import useIsNumeric from "../../composables/useIsNumeric";
-import usePagination from '../../composables/usePagination';
 import { Loot } from '../../core/models';
 
 const { client } = useClient();
@@ -89,3 +44,50 @@ watch(currentLocale, async() => {
   summaries.value = await getSummaries();
 });
 </script>
+
+<template>  
+  <div class="d-flex flex-column gap-3">
+    <div class="btn-group flex-wrap gap-2">
+      <a class="btn btn-outline-dark" @click="clearFilter()">
+        <MaterialIcon name="backspace-outline" :size="24" />
+      </a>
+      <a class="btn btn-outline-dark text-light" v-for="category in categories" @click="applyFilter(category)">
+        {{ category }}
+      </a>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+      <Card class="d-flex justify-content-center align-items-center me-auto">
+        <span>{{ loots.length }} loots</span>
+      </Card>
+      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
+        :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
+      <div class="input-group" style="max-width: 400px;">
+        <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
+          v-model="query"/>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+      <div style="width: 225px;" v-for="loot in p.pages[p.index.value]" :id="`${loot.id}`"
+        data-aos="zoom-out"
+        data-aos-duration="500">
+        <div class="ratio ratio-1x1 position-relative">
+          <img class="app-background rounded" :src="loot.getImage('latest')" loading="lazy"/>
+          <div class="position-absolute z-1 d-flex flex-column justify-content-end">
+            <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient rounded p-2">
+              <span>{{ loot.name }}</span>
+              <span>{{ loot.id }}</span>
+            </div>
+          </div>
+          <div class="position-absolute z-2 d-flex flex-column justify-content-start align-content-end">
+            <div class="d-inline-flex justify-content-end m-1">
+              <span class="rounded px-1" style="background: #0008; padding: 1px;">{{ loot.type }}</span>
+              <span v-if="loot.rarity != 'Default'" class="rounded px-1 ms-1" style="background: #0008; padding: 1px;">{{ loot.rarity }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
