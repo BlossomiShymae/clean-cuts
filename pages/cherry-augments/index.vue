@@ -23,7 +23,7 @@ const filteredCherryAugments = computed(() => {
 </script>
 
 <template>
-  <div class="d-flex flex-column gap-2">
+  <div class="d-flex flex-column gap-4">
     <div class="d-flex flex-row justify-content-end gap-2">
       <Card class="d-flex justify-content-center align-items-center me-auto">
         <span>{{ cherryAugments.length }} augments</span>
@@ -49,6 +49,10 @@ const filteredCherryAugments = computed(() => {
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="d-flex justify-content-center w-100">
+      <BackToTopButton/>
     </div>
   </div>
 </template>

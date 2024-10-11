@@ -30,7 +30,7 @@ const rarities = {
 </script>
 
 <template>
-  <div class="d-flex flex-column gap-2">
+  <div class="d-flex flex-column gap-4">
       <div class="d-flex gap-2 justify-content-end">
         <Card class="d-flex justify-content-center align-items-center me-auto">
             <span>{{ skins.length }} skins</span>
@@ -65,6 +65,10 @@ const rarities = {
                 </div>
             </div>
         </div>
+      </div>
+
+      <div class="d-flex justify-content-center w-100">
+        <BackToTopButton/>
       </div>
   </div>
 </template>

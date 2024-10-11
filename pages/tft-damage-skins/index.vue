@@ -52,5 +52,9 @@ const p = computed(() => {
         </div>
       </div>
     </div>
+
+    <div class="d-flex justify-content-center w-100">
+      <BackToTopButton/>
+    </div>
   </div>
 </template>

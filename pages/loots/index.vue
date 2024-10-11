@@ -46,7 +46,7 @@ watch(currentLocale, async() => {
 </script>
 
 <template>  
-  <div class="d-flex flex-column gap-3">
+  <div class="d-flex flex-column gap-4">
     <div class="btn-group flex-wrap gap-2">
       <a class="btn btn-outline-dark" @click="clearFilter()">
         <MaterialIcon name="backspace-outline" :size="24" />
@@ -88,6 +88,10 @@ watch(currentLocale, async() => {
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="d-flex justify-content-center w-100">
+      <BackToTopButton/>
     </div>
   </div>
 </template>
