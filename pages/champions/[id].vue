@@ -25,7 +25,7 @@ const swapCurrentSkin = (id: number) => {
     <Card class="mb-2 aos-fix" data-aos="fade-right" data-aos-duration="1000" style="z-index: 100 !important;">
       <div class="d-flex gap-4 flex-wrap align-items-center justify-content-center">
         <div style="min-width: 300px; max-width: 300px;">
-            <NuxtLink class="text-decoration-none" :to="`/skins/overview/${currentSkin.id}`">
+            <NuxtLink class="text-decoration-none" :to="`/skins/${currentSkin.id}`">
               <div class="ratio ratio-4x3">
                 <img class="object-fit-cover rounded" :src="currentSkin.getTile({locale: currentLocale, version: 'latest'})"/>
               </div>
