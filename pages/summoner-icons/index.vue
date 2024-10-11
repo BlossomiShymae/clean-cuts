@@ -1,58 +1,4 @@
-<template>
-  <div class="d-flex flex-column gap-2">
-      <h1>Summoner Icons</h1>
-
-      <div class="input-group">
-        <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
-            v-model="query"/>
-      </div>
-
-      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last"/>
-
-      <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
-          <table class="sortable table table-borderless">
-              <thead>
-                  <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Icon</th>
-                      <th scope="col">Title</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <tr v-for="icon in p.pages[p.index.value]" :key="icon.id" style="position: relative;">
-                        <th scope="row">
-                            <NuxtLink class="text-decoration-none text-light stretched-link" :to="`/summoner-icons/overview/${icon.id}`">
-                                {{ icon.id }}
-                            </NuxtLink>
-                        </th>
-                        <td>
-                            <NuxtLink class="text-decoration-none text-light" :to="`/summoner-icons/overview/${icon.id}`">
-                                <img :src="icon.getImage('latest')" width="32" height="32" loading="lazy" onerror="this.onerror = null; this.src='/clean-cuts/img/error.png'"/>
-                            </NuxtLink>
-                        </td>
-                        <td>
-                            <NuxtLink class="text-decoration-none text-light" :to="`/summoner-icons/overview/${icon.id}`">
-                                {{ icon.title }}
-                            </NuxtLink>
-                        </td>
-                </tr>
-              </tbody>
-          </table>
-      </div>
-
-      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last"/>
-  </div>
-</template>
-
 <script setup lang="ts">
-import Pagination from '~/components/Pagination.vue';
-import useClient from '../../composables/useClient';
-import useLocale from '~/composables/useLocale';
-import usePagination from '../../composables/usePagination';
-import useIsNumeric from '../../composables/useIsNumeric';
-
 const { client } = useClient();
 const { currentLocale } = useLocale();
 const getIcons = async () => (await client.summonerIcons.listAsync({locale: currentLocale.value, version: "latest"}))
@@ -76,3 +22,42 @@ const p = computed(() => {
     return usePagination(filtered, 100);
 });
 </script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div class="d-flex flex-wrap justify-content-end gap-2">
+        <Card class="d-flex justify-content-center align-items-center me-auto">
+            <span>{{ icons.length }} summoner icons</span>
+        </Card>
+        <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
+            :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
+        <div class="input-group" style="max-width: 400px;">
+            <input type="text" class="form-control border-light border-opacity-25" placeholder="Search" name="Search"
+                v-model="query"/>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+        <div style="width: 200px;" v-for="summonerIcon in p.pages[p.index.value]"
+            data-aos="zoom-out"
+            data-aos-duration="500">
+            <div class="ratio ratio-1x1 position-relative">
+                <img :src="summonerIcon.getImage('latest')" loading="lazy" class="rounded"/>
+                <div class="position-absolute z-1 d-flex flex-column justify-content-end">
+                    <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient rounded-bottom p-2">
+                        <span>{{ summonerIcon.title }}</span>
+                        <span class="fw-bold">{{ summonerIcon.id }}</span>
+                    </div>
+                </div>
+                <div class="position-absolute z-2 d-flex flex-column justify-content-start align-items-end">
+                    <div class="d-inline-flex justify-content-end gap-1 m-1">
+                        <span style="background: #0008; padding: 1px;" class="px-1 rounded">{{ summonerIcon.yearReleased }}</span>
+                        <span v-if="summonerIcon.isLegacy" class="px-1 rounded" style="background: #0008; padding: 1px;">{{ summonerIcon.isLegacy }}</span>
+                        <span v-if="summonerIcon.rarities && summonerIcon.rarities.length > 0 && summonerIcon.rarities[0].rarity != '0'" class="px-1 rounded" style="background: #0008; padding: 1px;">{{ summonerIcon.rarities[0].rarity }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</template>
