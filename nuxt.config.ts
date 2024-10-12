@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
+  vue: {  
+    compilerOptions: {
+      isCustomElement: (tag) => ['l-dot-stream'].includes(tag),
+    },
+  },
   app: {
     baseURL: "/clean-cuts/",
     pageTransition: {

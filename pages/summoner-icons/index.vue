@@ -38,11 +38,11 @@ const p = computed(() => {
     </div>
 
     <div class="d-flex flex-wrap justify-content-center gap-4">
-        <div style="width: 200px;" v-for="summonerIcon in p.pages[p.index.value]"
+        <div style="width: 200px;" v-for="summonerIcon in p.pages[p.index.value]" :key="summonerIcon.id"
             data-aos="zoom-out"
             data-aos-duration="500">
             <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-                <img :src="summonerIcon.getImage('latest')" loading="lazy" class="rounded"/>
+                <LLazyImg :src="summonerIcon.getImage('latest')" class="rounded" img-class="rounded"/>
                 <div class="position-absolute z-1 d-flex flex-column justify-content-end">
                     <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient rounded-bottom p-2">
                         <span>{{ summonerIcon.title }}</span>
@@ -52,7 +52,7 @@ const p = computed(() => {
                 <div class="position-absolute z-2 d-flex flex-column justify-content-start align-items-end">
                     <div class="d-inline-flex justify-content-end gap-1 m-1">
                         <span style="background: #0008; padding: 1px;" class="px-1 rounded">{{ summonerIcon.yearReleased }}</span>
-                        <span v-if="summonerIcon.isLegacy" class="px-1 rounded" style="background: #0008; padding: 1px;">{{ summonerIcon.isLegacy }}</span>
+                        <span v-if="summonerIcon.isLegacy" class="px-1 rounded" style="background: #0008; padding: 1px;">Legacy</span>
                         <span v-if="summonerIcon.rarities && summonerIcon.rarities.length > 0 && summonerIcon.rarities[0].rarity != '0'" class="px-1 rounded" style="background: #0008; padding: 1px;">{{ summonerIcon.rarities[0].rarity }}</span>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ const p = computed(() => {
     else 
         filtered = skins.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
 
-    return usePagination(filtered, 100);
+    return filtered;
 });
 
 const rarities = {
@@ -35,8 +35,6 @@ const rarities = {
         <Card class="d-flex justify-content-center align-items-center me-auto">
             <span>{{ skins.length }} skins</span>
         </Card>
-        <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-            :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
         <div class="input-group" style="max-width: 400px;">
             <input type="text" class="form-control border-light border-opacity-25" placeholder="Search" name="Search"
                 v-model="query"/>
@@ -44,15 +42,15 @@ const rarities = {
       </div>
       
       <div class="d-flex flex-row flex-wrap gap-4 justify-content-center">
-        <div v-for="wardSkin in p.pages[p.index.value]" :id="`${wardSkin.id}`"
+        <div v-for="wardSkin in p" :key="`${wardSkin.id}`"
             style="width: 225px;"
             data-aos="zoom-out"
             data-aos-duration="500">
             <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-                <img class="rounded app-background p-4" :src="wardSkin.getWardShadowImage('latest')" loading="lazy"/>
-                <img class="rounded p-4" :src="wardSkin.getWardImage('latest')" loading="lazy"/>
+                <LLazyImg class="rounded app-background" img-class="rounded app-background" :src="wardSkin.getWardShadowImage('latest')"/>
+                <LLazyImg class="rounded" :src="wardSkin.getWardImage('latest')"/>
                 <div class="position-absolute z-1 d-flex flex-column justify-content-end">
-                    <div class="d-inline-flex justify-content-between align-item-between p-1 rounded-bottom" style="background: #0008;">
+                    <div class="d-inline-flex justify-content-between align-item-between p-1 rounded-bottom bg-dark-gradient">
                         <span class="fs-6 fw-light">{{ wardSkin.name }}</span>
                         <span class="fw-bold">{{ wardSkin.id }}</span>
                     </div>

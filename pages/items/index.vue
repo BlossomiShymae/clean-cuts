@@ -12,16 +12,16 @@ watch(currentLocale, async () => {
 <template>
   <div class="d-flex flex-column gap-4">
     <div class="d-flex flex-row flex-wrap gap-2 justify-content-center">
-        <div v-for="item in items" :id="`${item.id}`"
+        <div v-for="item in items" :key="`${item.id}`"
             style="width: 64px;"
             data-aos="zoom-out"
             data-aos-duration="500">
             <NuxtLink :to="`/items/${item.id}`">
                 <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-                    <img class="rounded" :src="item.getIcon('latest')" loading="lazy"/>
+                    <LLazyImg class="rounded" img-class="rounded" :src="item.getIcon('latest')" />
                     <div class="position-absolute z-1 d-flex flex-column justify-content-end">
                         <div class="d-inline-flex justify-content-end align-items-center">
-                            <span class="fw-bold bg-dark-subtle rounded m-1" style="font-size: 8pt; padding: 1px;">{{ item.id }}</span>
+                            <span class="fw-bold rounded m-1 px-1" style="font-size: 8pt; padding: 1px; background: #000C;">{{ item.id }}</span>
                         </div>
                     </div>
                 </div>

@@ -37,15 +37,15 @@ const p = computed(() => {
       </div>
     </div>
     <div class="d-flex flex-wrap justify-content-center gap-4">
-      <div style="width: 200px;" v-for="summonerEmote in p.pages[p.index.value]"
+      <div style="width: 200px;" v-for="summonerEmote in p.pages[p.index.value]" :key="`${summonerEmote.id}`"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-          <img class="app-backgroud rounded" :src="summonerEmote.getInventoryIcon('latest')" loading="lazy"/>
+          <LLazyImg class="app-background rounded" :src="summonerEmote.getInventoryIcon('latest')"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
-            <div class="d-inline-flex justify-content-between bg-dark-gradient p-1 m-2 rounded-bottom">
+            <div class="d-inline-flex justify-content-between bg-dark-gradient p-2 rounded-bottom">
               <span>{{ summonerEmote.name }}</span>
-              <span>{{ summonerEmote.id }}</span>
+              <span class="fw-bold">{{ summonerEmote.id }}</span>
             </div>
           </div>
         </div>

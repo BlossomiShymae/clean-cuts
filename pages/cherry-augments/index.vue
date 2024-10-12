@@ -35,14 +35,14 @@ const filteredCherryAugments = computed(() => {
     </div>
 
     <div class="d-flex flex-wrap justify-content-around gap-4">
-      <div v-for="cherryAugment in filteredCherryAugments" :id="`${cherryAugment.id}-${cherryAugment.nameTRA}`"
+      <div v-for="cherryAugment in filteredCherryAugments" :key="`${cherryAugment.id}-${cherryAugment.nameTRA}`"
         style="width: 200px;"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-          <img class="rounded app-background p-4" :src="cherryAugment.getAugmentSmallIcon('latest')" loading="lazy"/>
+          <LLazyImg class="rounded app-background" img-class="rounded app-background" :src="cherryAugment.getAugmentSmallIcon('latest')"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
-            <div class="d-inline-flex justify-content-between align-items-center p-1" style="background: #0008;" >
+            <div class="d-inline-flex justify-content-between align-items-center p-1 bg-dark-gradient" >
               <span class="fs-6 fw-light ">{{ cherryAugment.nameTRA }}</span>
               <span class="fw-bold rounded">{{ cherryAugment.id }}</span>
             </div>

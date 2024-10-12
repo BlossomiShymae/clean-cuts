@@ -18,7 +18,7 @@ const p = computed(() => {
     filtered = tftDamageSkins.value.filter((x) => x.itemId == parseInt(query.value));
   else
     filtered = tftDamageSkins.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
-  return usePagination(filtered, 24);
+  return filtered;
 })
 </script>
 
@@ -35,11 +35,11 @@ const p = computed(() => {
     </div>
 
     <div class="d-flex flex-wrap gap-4 justify-content-center">
-      <div style="width: 200px;" v-for="tftDamageSkin in tftDamageSkins" :id="`${tftDamageSkin.itemId}`"
+      <div style="width: 200px;" v-for="tftDamageSkin in p" :key="`${tftDamageSkin.itemId}`"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-          <img class="rounded" :src="tftDamageSkin.getLoadoutsIcon('latest')" loading="lazy"/>
+          <LLazyImg class="rounded" img-class="rounded" :src="tftDamageSkin.getLoadoutsIcon('latest')"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient p-2">
               <span>{{ tftDamageSkin.name }}</span>

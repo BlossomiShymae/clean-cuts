@@ -69,11 +69,11 @@ watch(currentLocale, async() => {
     </div>
 
     <div class="d-flex flex-wrap justify-content-center gap-4">
-      <div style="width: 225px;" v-for="loot in p.pages[p.index.value]" :id="`${loot.id}`"
+      <div style="width: 225px;" v-for="loot in p.pages[p.index.value]" :key="`${loot.id}`"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-          <img class="app-background rounded" :src="loot.getImage('latest')" loading="lazy"/>
+          <LLazyImg class="app-background rounded" img-class="app-background rounded" :src="getLootImage(loot)" />
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient rounded p-2">
               <span>{{ loot.name }}</span>

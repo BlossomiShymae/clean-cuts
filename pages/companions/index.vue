@@ -40,11 +40,11 @@ const p = computed(() => {
     </div>
 
     <div class="d-flex flex-row flex-wrap justify-content-center gap-4">
-      <div style="width: 350px;" v-for="companion in p.pages[p.index.value]"
+      <div style="width: 350px;" v-for="companion in p.pages[p.index.value]" :key="companion.itemId"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-16x9 position-relative trans-hover-grow">
-          <img class="object-fit-cover rounded" :src="companion.getLoadoutsIcon('latest')" loading="lazy" />
+          <LLazyImg class="object-fit-cover rounded" img-class="object-fit-cover rounded" :src="companion.getLoadoutsIcon('latest')" />
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-center p-2 bg-dark-gradient rounded">
               <span class="fs-6">{{ companion.name }}</span>

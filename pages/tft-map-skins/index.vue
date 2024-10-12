@@ -34,11 +34,11 @@ const p = computed(() => {
       </div>
     </div>
     <div class="d-flex flex-wrap justify-content-center gap-4">
-      <div style="width: 350px;" v-for="tftMapSkin in tftMapSkins" :id="`${tftMapSkin.itemId}`"
+      <div style="width: 350px;" v-for="tftMapSkin in p" :key="`${tftMapSkin.itemId}`"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-4x3 position-relative trans-hover-grow">
-          <img class="object-fit-cover rounded" :src="tftMapSkin.getLoadoutsIcon('latest')" loading="lazy"/>
+          <LLazyImg class="object-fit-cover rounded" img-class="object-fit-cover rounded" :src="tftMapSkin.getLoadoutsIcon('latest')"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient p-2 rounded">
               <div class="d-flex flex-column">
