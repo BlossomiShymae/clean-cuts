@@ -53,7 +53,7 @@ const p = computed(() => {
                     <div class="d-inline-flex justify-content-end gap-1 m-1">
                         <span style="background: #0008; padding: 1px;" class="px-1 rounded">{{ summonerIcon.yearReleased }}</span>
                         <span v-if="summonerIcon.isLegacy" class="px-1 rounded" style="background: #0008; padding: 1px;">Legacy</span>
-                        <span v-if="summonerIcon.rarities && summonerIcon.rarities.length > 0 && summonerIcon.rarities[0].rarity != '0'" class="px-1 rounded" style="background: #0008; padding: 1px;">{{ summonerIcon.rarities[0].rarity }}</span>
+                        <span v-if="summonerIcon.rarities && summonerIcon.rarities.length > 0 && summonerIcon.rarities[0].rarity != '0'" class="px-1 rounded" style="background: #0008; padding: 1px;">{{ useRarities(summonerIcon.rarities[0].rarity) }}</span>
                     </div>
                 </div>
             </div>

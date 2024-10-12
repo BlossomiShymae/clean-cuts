@@ -20,13 +20,6 @@ const p = computed(() => {
 
     return filtered;
 });
-
-const rarities = {
-    "1": "Epic",
-    "2": "Legendary",
-    "3": "Ultimate",
-    "4": "Mythic"
-};
 </script>
 
 <template>
@@ -58,7 +51,7 @@ const rarities = {
                 <div class="position-absolute z-2 d-flex flex-column justify-content-start align-items-end">
                     <div class="m-2">
                         <span v-if="wardSkin.isLegacy" style="background: #0008;" class="rounded p-1">Legacy</span>
-                        <span v-if="wardSkin.rarities && wardSkin.rarities.length > 0 && wardSkin.rarities[0].rarity != '0'" style="background: #0008;" class="rounded ms-1 p-1">{{ rarities[wardSkin.rarities[0].rarity as keyof typeof rarities] }}</span>
+                        <span v-if="wardSkin.rarities && wardSkin.rarities.length > 0 && wardSkin.rarities[0].rarity != '0'" style="background: #0008;" class="rounded ms-1 p-1">{{ useRarities(wardSkin.rarities[0].rarity) }}</span>
                     </div>
                 </div>
             </div>
