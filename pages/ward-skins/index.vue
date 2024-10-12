@@ -48,7 +48,7 @@ const rarities = {
             style="width: 225px;"
             data-aos="zoom-out"
             data-aos-duration="500">
-            <div class="ratio ratio-1x1 position-relative">
+            <div class="ratio ratio-1x1 position-relative trans-hover-grow">
                 <img class="rounded app-background p-4" :src="wardSkin.getWardShadowImage('latest')" loading="lazy"/>
                 <img class="rounded p-4" :src="wardSkin.getWardImage('latest')" loading="lazy"/>
                 <div class="position-absolute z-1 d-flex flex-column justify-content-end">

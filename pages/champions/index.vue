@@ -22,12 +22,12 @@ watch(currentLocale, async () => {
             data-aos="zoom-out"
             data-aos-duration="500">
             <NuxtLink :to="`/champions/${summary.id}`">
-                <div class="ratio ratio-16x9 position-relative">
+                <div class="ratio ratio-16x9 position-relative trans-hover-grow">
                     <img class="object-fit-cover rounded" 
                         :src="skins.find(x => (x.id / 1000) == summary.id)?.getTile({locale: currentLocale, version: 'latest'})"
                         loading="lazy"/>
                     <div class="position-absolute z-1 d-flex flex-column justify-content-end">
-                        <div class="d-inline-flex justify-content-between align-items-center px-2" style="background: #0008;">
+                        <div class="d-inline-flex justify-content-between align-items-center px-2 bg-dark-gradient rounded-bottom">
                             <span class="fs-5 fw-light">{{ summary.name }}</span>
                             <span class="fw-bold">{{ summary.id }}</span>
                         </div>

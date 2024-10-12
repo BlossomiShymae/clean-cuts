@@ -40,7 +40,7 @@ const p = computed(() => {
       <div style="width: 200px;" v-for="summonerEmote in p.pages[p.index.value]"
         data-aos="zoom-out"
         data-aos-duration="500">
-        <div class="ratio ratio-1x1 position-relative">
+        <div class="ratio ratio-1x1 position-relative trans-hover-grow">
           <img class="app-backgroud rounded" :src="summonerEmote.getInventoryIcon('latest')" loading="lazy"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between bg-dark-gradient p-1 m-2 rounded-bottom">

@@ -37,7 +37,7 @@ const p = computed(() => {
       <div style="width: 350px;" v-for="tftMapSkin in tftMapSkins" :id="`${tftMapSkin.itemId}`"
         data-aos="zoom-out"
         data-aos-duration="500">
-        <div class="ratio ratio-4x3 position-relative">
+        <div class="ratio ratio-4x3 position-relative trans-hover-grow">
           <img class="object-fit-cover rounded" :src="tftMapSkin.getLoadoutsIcon('latest')" loading="lazy"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient p-2 rounded">

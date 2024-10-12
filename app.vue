@@ -157,4 +157,12 @@ ul.dropdown-menu {
 .bg-dark-gradient {
   background: linear-gradient(0deg, #000, transparent),linear-gradient(0deg, #000, transparent);
 }
+
+.trans-hover-grow {
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    transform: scale(1.0625);
+  }
+}
 </style>

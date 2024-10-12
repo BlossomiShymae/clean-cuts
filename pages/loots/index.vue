@@ -72,7 +72,7 @@ watch(currentLocale, async() => {
       <div style="width: 225px;" v-for="loot in p.pages[p.index.value]" :id="`${loot.id}`"
         data-aos="zoom-out"
         data-aos-duration="500">
-        <div class="ratio ratio-1x1 position-relative">
+        <div class="ratio ratio-1x1 position-relative trans-hover-grow">
           <img class="app-background rounded" :src="loot.getImage('latest')" loading="lazy"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient rounded p-2">

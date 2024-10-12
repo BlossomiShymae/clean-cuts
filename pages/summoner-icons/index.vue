@@ -41,7 +41,7 @@ const p = computed(() => {
         <div style="width: 200px;" v-for="summonerIcon in p.pages[p.index.value]"
             data-aos="zoom-out"
             data-aos-duration="500">
-            <div class="ratio ratio-1x1 position-relative">
+            <div class="ratio ratio-1x1 position-relative trans-hover-grow">
                 <img :src="summonerIcon.getImage('latest')" loading="lazy" class="rounded"/>
                 <div class="position-absolute z-1 d-flex flex-column justify-content-end">
                     <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient rounded-bottom p-2">
