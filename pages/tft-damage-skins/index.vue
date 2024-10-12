@@ -39,7 +39,7 @@ const p = computed(() => {
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-          <LLazyImg class="rounded" img-class="rounded" :src="tftDamageSkin.getLoadoutsIcon('latest')"/>
+          <LLazyImg class="rounded" img-class="rounded" :src="tftDamageSkin.getLoadoutsIcon({locale: currentLocale, version: 'latest'})"/>
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient p-2">
               <span>{{ tftDamageSkin.name }}</span>

@@ -521,7 +521,7 @@ export class TftDamageSkin extends CommunityDragonObject {
     this.level = json.level;
   }
 
-  getLoadoutsIcon(version: string): string {
-    return this.resolveGamePath({path: this.loadoutsIcon, version: version});
+  getLoadoutsIcon(args: LocaleVersionArgs): string {
+    return this.resolveClientPath({path: this.loadoutsIcon, args: args});
   }
 }
