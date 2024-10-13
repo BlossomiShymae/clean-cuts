@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import 'ldrs/dotStream';
-
 const props = defineProps<{
   src: string | undefined,
   imgClass?: string
@@ -8,10 +6,15 @@ const props = defineProps<{
 
 const source = ref(props.src);
 const loading = ref(true);
+
+onMounted(async () => {
+  const { dotStream } = await import('ldrs');
+  dotStream.register();
+});
 </script>
 
 <template>
-  <div class="d-flex justify-content-center align-items-center"> 
+  <ClientOnly class="d-flex justify-content-center align-items-center"> 
     <l-dot-stream v-if="loading"
       class="w-100 h-100"
       size="60"
@@ -23,5 +26,5 @@ const loading = ref(true);
       loading="lazy" 
       v-on:load="loading = false;" 
       v-on:error="loading = false; source = '/clean-cuts/img/error.png';" />
-  </div>
+  </ClientOnly>
 </template>
