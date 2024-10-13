@@ -1,8 +1,17 @@
+<script setup lang="ts">
+const { client } = useClient();
+const { currentLocale } = useLocale();
+const getTftItems = async() => await client.tftItems.listAsync({ locale: currentLocale.value, version: "latest"});
+
+const tftItems = ref(await getTftItems());
+watch(currentLocale, async() => {
+  tftItems.value = await getTftItems();
+});
+</script>
+
 <template>
   <div class="d-flex flex-column gap-2">
-    <h1>TFT Items</h1>
-
-    <div class="overflow-hidden rounded border border-light border-opacity-25 p-4">
+    <div class="overflow-hidden rounded border border-light border-opacity-25 p-4 app-background">
       <table class="sortable table table-borderless">
         <thead>
           <tr>
@@ -32,17 +41,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import useClient from '~/composables/useClient';
-import useLocale from '~/composables/useLocale';
-
-const { client } = useClient();
-const { currentLocale } = useLocale();
-const getTftItems = async() => await client.tftItems.listAsync({ locale: currentLocale.value, version: "latest"});
-
-const tftItems = ref(await getTftItems());
-watch(currentLocale, async() => {
-  tftItems.value = await getTftItems();
-});
-</script>
