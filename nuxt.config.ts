@@ -7,6 +7,7 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => ['l-dot-stream'].includes(tag),
     },
   },
+  modules: ['@hypernym/nuxt-anime'],
   app: {
     baseURL: "/clean-cuts/",
     pageTransition: {
