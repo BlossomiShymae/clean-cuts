@@ -4,23 +4,13 @@ const { currentLocale } = useLocale();
 const getIcons = async () => (await client.summonerIcons.listAsync({locale: currentLocale.value, version: "latest"}))
 .sort((a, b) => a.id - b.id);
 
-const query = ref("")
-
 const icons = ref(await getIcons());
 watch(currentLocale, async() => {
     icons.value = await getIcons();
 });
 
-const { isNumeric } = useIsNumeric();
-const p = computed(() => {
-    let filtered = [];
-    if (isNumeric(query.value))
-        filtered = icons.value.filter((x) => x.id == parseInt(query.value, 10));
-    else 
-        filtered = icons.value.filter((x) => x.title.toLowerCase().includes(query.value.toLowerCase()));
-
-    return usePagination(filtered, 100);
-});
+const { query, paginate } = useQueryable(icons, (x) => x.id, (x) => x.title);
+const pagination = paginate(100);
 </script>
 
 <template>
@@ -29,16 +19,12 @@ const p = computed(() => {
         <Card class="d-flex justify-content-center align-items-center me-auto">
             <span>{{ icons.length }} summoner icons</span>
         </Card>
-        <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-            :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
-        <div class="input-group" style="max-width: 400px;">
-            <input type="text" class="form-control border-light border-opacity-25" placeholder="Search" name="Search"
-                v-model="query"/>
-        </div>
+        <Pagination :pagination="pagination"/>
+        <Search v-model="query"/>
     </div>
 
     <div class="d-flex flex-wrap justify-content-center gap-4">
-        <div style="width: 200px;" v-for="summonerIcon in p.pages[p.index.value]" :key="summonerIcon.id"
+        <div style="width: 200px;" v-for="summonerIcon in pagination.pages[pagination.index.value]" :key="summonerIcon.id"
             data-aos="zoom-out"
             data-aos-duration="500">
             <div class="ratio ratio-1x1 position-relative trans-hover-grow">

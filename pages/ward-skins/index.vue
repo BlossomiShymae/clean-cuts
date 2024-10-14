@@ -3,23 +3,12 @@ const { client } = useClient();
 const { currentLocale } = useLocale();
 const getSkins = async () => await client.wardSkins.listAsync({locale: currentLocale.value, version: "latest"});
 
-const query = ref("");
-
 const skins = ref(await getSkins());
 watch(currentLocale, async() => {
     skins.value = await getSkins();
 });
 
-const { isNumeric } = useIsNumeric();
-const p = computed(() => {
-    let filtered = [];
-    if (isNumeric(query.value))
-        filtered = skins.value.filter((x) => x.id == parseInt(query.value, 10));
-    else 
-        filtered = skins.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
-
-    return filtered;
-});
+const { query, results } = useQueryable(skins, (x) => x.id, (x) => x.name);
 </script>
 
 <template>
@@ -28,14 +17,11 @@ const p = computed(() => {
         <Card class="d-flex justify-content-center align-items-center me-auto">
             <span>{{ skins.length }} skins</span>
         </Card>
-        <div class="input-group" style="max-width: 400px;">
-            <input type="text" class="form-control border-light border-opacity-25" placeholder="Search" name="Search"
-                v-model="query"/>
-        </div>
+        <Search v-model="query"/>
       </div>
       
       <div class="d-flex flex-row flex-wrap gap-4 justify-content-center">
-        <div v-for="wardSkin in p" :key="`${wardSkin.id}`"
+        <div v-for="wardSkin in results" :key="`${wardSkin.id}`"
             style="width: 225px;"
             data-aos="zoom-out"
             data-aos-duration="500">

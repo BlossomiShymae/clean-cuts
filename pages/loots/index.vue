@@ -20,7 +20,7 @@ const loots = ref(await getLoots());
 const categories = new Set(loots.value.map((x) => x.type));
 
 const { isNumeric } = useIsNumeric();
-const p = computed(() => {
+const pagination = computed(() => {
   let filtered = [];
   
   filtered = loots.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
@@ -60,16 +60,12 @@ watch(currentLocale, async() => {
       <Card class="d-flex justify-content-center align-items-center me-auto">
         <span>{{ loots.length }} loots</span>
       </Card>
-      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
-      <div class="input-group" style="max-width: 400px;">
-        <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
-          v-model="query"/>
-      </div>
+      <Pagination :pagination="pagination"/>
+      <Search v-model="query"/>
     </div>
 
     <div class="d-flex flex-wrap justify-content-center gap-4">
-      <div style="width: 225px;" v-for="loot in p.pages[p.index.value]" :key="`${loot.id}`"
+      <div style="width: 225px;" v-for="loot in pagination.pages[pagination.index.value]" :key="`${loot.id}`"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">

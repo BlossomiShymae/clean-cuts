@@ -4,22 +4,12 @@ const { currentLocale } = useLocale();
 const getCherryAugments = async () => (await client.cherryAugments.listAsync({locale: currentLocale.value, version: "latest"}))
   .sort((a, b) => a.id - b.id);
 
-const query = ref("");
-
 const cherryAugments = ref(await getCherryAugments());
 watch (currentLocale, async() => {
   cherryAugments.value = await getCherryAugments();
 });
 
-const { isNumeric } = useIsNumeric();
-const filteredCherryAugments = computed(() => {
-  let filtered = [];
-  if (isNumeric(query.value))
-    filtered = cherryAugments.value.filter((x) => x.id == parseInt(query.value, 10));
-  else
-    filtered = cherryAugments.value.filter((x) => x.nameTRA.toLowerCase().includes(query.value.toLowerCase()));
-  return filtered;
-})
+const { query, results } = useQueryable(cherryAugments, (x) => x.id, (x) => x.nameTRA);
 </script>
 
 <template>
@@ -28,14 +18,11 @@ const filteredCherryAugments = computed(() => {
       <Card class="d-flex justify-content-center align-items-center me-auto">
         <span>{{ cherryAugments.length }} augments</span>
       </Card>
-      <div class="input-group" style="max-width: 400px;">
-        <input type="text" class="form-control border-light border-opacity-25" placeholder="Search" name="Search"
-          v-model="query"/>
-      </div>
+      <Search v-model="query"/>
     </div>
 
     <div class="d-flex flex-wrap justify-content-around gap-4">
-      <div v-for="cherryAugment in filteredCherryAugments" :key="`${cherryAugment.id}-${cherryAugment.nameTRA}`"
+      <div v-for="cherryAugment in results" :key="`${cherryAugment.id}-${cherryAugment.nameTRA}`"
         style="width: 200px;"
         data-aos="zoom-out"
         data-aos-duration="500">

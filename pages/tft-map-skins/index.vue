@@ -4,22 +4,12 @@ const { currentLocale } = useLocale();
 const getTftMapSkins = async () => (await client.tftMapSkins.listAsync({ locale: currentLocale.value, version: "latest"}))
   .sort((a, b) => a.itemId - b.itemId);
 
-const query = ref("");
-
 const tftMapSkins = ref(await getTftMapSkins());
 watch(currentLocale, async() => {
   tftMapSkins.value = await getTftMapSkins();
 });
 
-const { isNumeric } = useIsNumeric();
-const p = computed(() => {
-  let filtered = [];
-  if (isNumeric(query.value))
-    filtered = tftMapSkins.value.filter((x) => x.itemId == parseInt(query.value));
-  else
-    filtered = tftMapSkins.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
-  return filtered;
-})
+const { query, results } = useQueryable(tftMapSkins, (x) => x.itemId, (x) => x.name);
 </script>
 
 <template>
@@ -28,13 +18,10 @@ const p = computed(() => {
       <Card class="d-flex justify-content-center align-items-center me-auto">
         <span>{{ tftMapSkins.length }} TFT map skins</span>
       </Card>
-      <div class="input-group" style="max-width: 400px;">
-        <input type="text" class="form-control bg-transparent border-light border-opacity-25" placeholder="Search" name="Search"
-          v-model="query"/>
-      </div>
+      <Search v-model="query"/>
     </div>
     <div class="d-flex flex-wrap justify-content-center gap-4">
-      <div style="width: 350px;" v-for="tftMapSkin in p" :key="`${tftMapSkin.itemId}`"
+      <div style="width: 350px;" v-for="tftMapSkin in results" :key="`${tftMapSkin.itemId}`"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-4x3 position-relative trans-hover-grow">

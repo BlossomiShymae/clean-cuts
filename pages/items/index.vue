@@ -7,12 +7,20 @@ const items = ref(await getItems());
 watch(currentLocale, async () => {
     items.value = await getItems();
 });
+
+const { query, results } = useQueryable(items, (x) => x.id, (x) => x.name);
 </script>
 
 <template>
   <div class="d-flex flex-column gap-4">
+    <div class="d-flex justify-content-end gap-2">
+        <Card class="d-flex justify-content-end me-auto">
+            <span>{{ items.length }} items</span>
+        </Card>
+        <Search v-model="query"/>
+    </div>
     <div class="d-flex flex-row flex-wrap gap-2 justify-content-center">
-        <div v-for="item in items" :key="`${item.id}`"
+        <div v-for="item in results" :key="`${item.id}`"
             style="width: 64px;"
             data-aos="zoom-out"
             data-aos-duration="500">

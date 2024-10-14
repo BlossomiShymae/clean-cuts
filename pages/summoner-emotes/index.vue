@@ -4,23 +4,13 @@ const { currentLocale } = useLocale();
 const getEmotes = async () => (await client.summonerEmotes.listAsync({locale: currentLocale.value, version: "latest"}))
 .sort((a, b) => a.id - b.id);
 
-const query = ref("");
-
 const emotes = ref(await getEmotes());
 watch(currentLocale, async() => {
   emotes.value = await getEmotes();
 });
 
-const { isNumeric } = useIsNumeric();
-const p = computed(() => {
-  let filtered = [];
-  if (isNumeric(query.value))
-      filtered = emotes.value.filter((x) => x.id == parseInt(query.value, 10));
-  else 
-      filtered = emotes.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
-
-  return usePagination(filtered, 100);
-})
+const { query, paginate } = useQueryable(emotes, (x) => x.id, (x) => x.name);
+const pagination = paginate(100);
 </script>
 
 <template>
@@ -29,15 +19,11 @@ const p = computed(() => {
       <Card class="d-flex justify-content-center align-items-center me-auto">
         <span>{{ emotes.length }} summoner emotes</span>
       </Card>
-      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
-      <div class="input-group" style="max-width: 400px;">
-        <input type="text" class="form-control border-light border-opacity-25" placeholder="Search" name="Search"
-            v-model="query"/>
-      </div>
+      <Pagination :pagination="pagination"/>
+      <Search v-model="query"/>
     </div>
     <div class="d-flex flex-wrap justify-content-center gap-4">
-      <div style="width: 200px;" v-for="summonerEmote in p.pages[p.index.value]" :key="`${summonerEmote.id}`"
+      <div style="width: 200px;" v-for="summonerEmote in pagination.pages[pagination.index.value]" :key="`${summonerEmote.id}`"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">

@@ -12,12 +12,20 @@ watch(currentLocale, async () => {
     summaries.value = await getSummaries();
     skins.value = await getSkins();
 });
+
+const { query, results } = useQueryable(summaries, (x) => x.id, (x) => x.name);
 </script>
 
 <template>
   <div class="d-flex flex-column gap-4">
+    <div class="d-flex justify-content-end gap-2">
+        <Card class="d-flex justify-content-center align-items-center me-auto">
+            <span>{{ summaries.length }} champions</span> 
+        </Card>
+        <Search v-model="query"/>
+    </div>
     <div class="d-flex flex-row flex-wrap gap-4 justify-content-center">
-        <div v-for="summary in summaries" :key="`${summary.id}`" 
+        <div v-for="summary in results" :key="`${summary.id}`" 
             style="width: 200px;"
             data-aos="zoom-out"
             data-aos-duration="500">

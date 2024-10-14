@@ -4,23 +4,13 @@ const { currentLocale } = useLocale();
 const getCompanions = async () => (await client.companions.listAsync({locale: currentLocale.value, version: "latest"}))
 .sort((a, b) => a.itemId - b.itemId);
 
-const query = ref("");
-
 const companions = ref(await getCompanions());
 watch(currentLocale, async() => {
   companions.value = await getCompanions();
 });
 
-const { isNumeric } = useIsNumeric();
-const p = computed(() => {
-  let filtered = [];
-  if (isNumeric(query.value))
-    filtered = companions.value.filter((x) => x.itemId == parseInt(query.value, 10));
-  else
-    filtered = companions.value.filter((x) => x.name.toLowerCase().includes(query.value.toLowerCase()));
-
-  return usePagination(filtered, 100);
-})
+const { query, paginate } = useQueryable(companions, (x) => x.itemId, (x) => x.name);
+const pagination = paginate(100);
 </script>
 
 <template>
@@ -29,18 +19,12 @@ const p = computed(() => {
       <Card class="d-flex justify-content-center align-items-center me-auto">
         <span>{{ companions.length }} companions</span>
       </Card>
-
-      <Pagination :pages="p.pages" :count="p.count" :index="p.index.value" :on-prev="p.prev" :on-next="p.next"
-        :on-first="p.first" :on-last="p.last" style="min-width: 300px;"/>
-
-      <div class="input-group" style="max-width: 400px;">
-        <input type="text" class="form-control border-light border-opacity-25"
-          placeholder="Search" name="Search" v-model="query" />
-      </div>
+      <Pagination :pagination="pagination"/>
+      <Search v-model="query"/>
     </div>
 
     <div class="d-flex flex-row flex-wrap justify-content-center gap-4">
-      <div style="width: 350px;" v-for="companion in p.pages[p.index.value]" :key="companion.itemId"
+      <div style="width: 350px;" v-for="companion in pagination.pages[pagination.index.value]" :key="companion.itemId"
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-16x9 position-relative trans-hover-grow">
