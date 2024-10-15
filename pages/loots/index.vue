@@ -59,7 +59,7 @@ const getLootImage = (loot: Loot) => {
         data-aos="zoom-out"
         data-aos-duration="500">
         <div class="ratio ratio-1x1 position-relative trans-hover-grow">
-          <LLazyImg class="app-background rounded" img-class="app-background rounded" :src="getLootImage(loot)" />
+          <LLazyImg class="app-background rounded" img-class="rounded" :src="getLootImage(loot)" />
           <div class="position-absolute z-1 d-flex flex-column justify-content-end">
             <div class="d-inline-flex justify-content-between align-items-end bg-dark-gradient rounded p-2">
               <span>{{ loot.name }}</span>
