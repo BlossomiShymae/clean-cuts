@@ -27,9 +27,9 @@ const swapCurrentSkin = (id: number) => {
               <button class="btn dropdown-toggle w-100 text-light" type="button" data-bs-toggle="dropdown">
                 {{ currentSkin.name }} <span class="ms-2 fw-bold">ID: {{ currentSkin.id }}</span>
               </button>
-              <ul class="dropdown-menu w-100 p-2">
-                <li v-for="skin in champion.skins">
-                  <button class="btn" type="button" @click="swapCurrentSkin(skin.id)">{{ skin.name }}</button>
+              <ul class="dropdown-menu w-100 p-2" style="max-height: 300px; overflow-y: auto;">
+                <li v-for="skin in champion.skins" class="border-bottom border-light border-opacity-25">
+                  <button class="btn p-1 w-100" type="button" @click="swapCurrentSkin(skin.id)">{{ skin.name }}</button>
                 </li>
               </ul>
             </div>
