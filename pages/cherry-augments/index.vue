@@ -1,14 +1,9 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getCherryAugments = async () => (await client.cherryAugments.listAsync({locale: currentLocale.value, version: "latest"}))
-  .sort((a, b) => a.id - b.id);
 
-const cherryAugments = ref(await getCherryAugments());
-watch (currentLocale, async() => {
-  cherryAugments.value = await getCherryAugments();
-});
-
+const { data: cherryAugments } = await useLocalizedData(async (x) => (await client.cherryAugments.listAsync({locale: x, version: "latest"}))
+  .sort((a, b) => a.id - b.id));
+  
 const { query, results } = useQueryable(cherryAugments, (x) => x.id, (x) => x.nameTRA);
 </script>
 

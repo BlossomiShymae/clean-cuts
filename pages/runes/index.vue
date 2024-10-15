@@ -1,13 +1,8 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getRunes = async () => (await client.perks.listAsync({locale: currentLocale.value, version: "latest"}))
-.sort((a, b) => a.id - b.id)
 
-const runes = ref(await getRunes());
-watch(currentLocale, async() => {
-    runes.value = await getRunes();
-});
+const { data: runes } = await useLocalizedData(async (x) => (await client.perks.listAsync({locale: x, version: "latest"}))
+.sort((a, b) => a.id - b.id));
 
 const { query, results } = useQueryable(runes, (x) => x.id, (x) => x.name);
 </script>

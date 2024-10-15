@@ -1,12 +1,7 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getItems = async () => await client.items.listAsync({ locale: currentLocale.value, version: "latest"});
 
-const items = ref(await getItems());
-watch(currentLocale, async () => {
-    items.value = await getItems();
-});
+const { data: items } = await useLocalizedData(async (x) => await client.items.listAsync({ locale: x, version: "latest"}));
 
 const { query, results } = useQueryable(items, (x) => x.id, (x) => x.name);
 </script>

@@ -1,13 +1,8 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getEmotes = async () => (await client.summonerEmotes.listAsync({locale: currentLocale.value, version: "latest"}))
-.sort((a, b) => a.id - b.id);
 
-const emotes = ref(await getEmotes());
-watch(currentLocale, async() => {
-  emotes.value = await getEmotes();
-});
+const { data: emotes } = await useLocalizedData(async (x) => (await client.summonerEmotes.listAsync({locale: x, version: "latest"}))
+.sort((a, b) => a.id - b.id));
 
 const { query, paginate } = useQueryable(emotes, (x) => x.id, (x) => x.name);
 const pagination = paginate(100);

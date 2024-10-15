@@ -1,13 +1,8 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getIcons = async () => (await client.summonerIcons.listAsync({locale: currentLocale.value, version: "latest"}))
-.sort((a, b) => a.id - b.id);
 
-const icons = ref(await getIcons());
-watch(currentLocale, async() => {
-    icons.value = await getIcons();
-});
+const { data: icons } = await useLocalizedData(async (x) => (await client.summonerIcons.listAsync({locale: x, version: "latest"}))
+.sort((a, b) => a.id - b.id));
 
 const { query, paginate } = useQueryable(icons, (x) => x.id, (x) => x.title);
 const pagination = paginate(100);

@@ -1,17 +1,11 @@
 <script setup lang="ts">
 const { client } = useClient();
 const { currentLocale } = useLocale();
-const getSummaries = async () => (await client.championSummaries.listAsync({locale: currentLocale.value, version: "latest"}))
-    .filter((x) => x.id != -1) // Remove placeholder champion
-    .sort((a, b) => a.name.localeCompare(b.name));
-const getSkins = async () => await client.skins.listAsync({locale: currentLocale.value, version: "latest"});
 
-const summaries = ref(await getSummaries());
-const skins = ref(await getSkins());
-watch(currentLocale, async () => {
-    summaries.value = await getSummaries();
-    skins.value = await getSkins();
-});
+const { data: summaries } = await useLocalizedData(async (x) => (await client.championSummaries.listAsync({locale: x, version: "latest"}))
+    .filter((x) => x.id != -1) // Remove placeholder champion
+    .sort((a, b) => a.name.localeCompare(b.name)));
+const { data: skins } = await useLocalizedData(async (x) => await client.skins.listAsync({locale: x, version: "latest"}));
 
 const { query, results } = useQueryable(summaries, (x) => x.id, (x) => x.name);
 </script>

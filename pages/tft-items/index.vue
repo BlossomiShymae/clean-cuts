@@ -1,12 +1,7 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getTftItems = async() => await client.tftItems.listAsync({ locale: currentLocale.value, version: "latest"});
 
-const tftItems = ref(await getTftItems());
-watch(currentLocale, async() => {
-  tftItems.value = await getTftItems();
-});
+const { data: tftItems } = await useLocalizedData(async(x) => await client.tftItems.listAsync({ locale: x, version: "latest"}));
 </script>
 
 <template>

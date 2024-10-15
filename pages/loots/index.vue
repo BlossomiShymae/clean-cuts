@@ -1,25 +1,22 @@
 <script setup lang="ts">
-import { Loot } from '../../core/models';
+import { Loot } from '~/core/models';
 
 const { client } = useClient();
-const { currentLocale } = useLocale();
 
 const query = ref("");
 const filter = ref("");
-const getLoots = async () => (await client.loots.listAsync({locale: currentLocale.value, version: "latest"}))
+
+const { data: loots } = await useLocalizedData(async (x) => (await client.loots.listAsync({locale: x, version: "latest"}))
   .sort((a, b) => a.id.localeCompare(b.id))
-  .filter((x) => x.id != "");
-const getSummaries = async () => await client.championSummaries.listAsync({locale: currentLocale.value, version: "latest"});
+  .filter((x) => x.id != ""));
+
+const { data: summaries } = await useLocalizedData(async (x) => await client.championSummaries.listAsync({locale: x, version: "latest"}));
 
 const clearFilter = () => filter.value = "";
 const applyFilter = (category: string) => filter.value = category;
 
-// Alphanumerically sort by id, remove null entries
-const loots = ref(await getLoots());
-
 const categories = new Set(loots.value.map((x) => x.type));
 
-const { isNumeric } = useIsNumeric();
 const pagination = computed(() => {
   let filtered = [];
   
@@ -30,19 +27,12 @@ const pagination = computed(() => {
   return usePagination(filtered, 100);
 });
 
-const summaries = ref(await getSummaries());
-
 const getLootImage = (loot: Loot) => {
   if (loot.type.includes('Statstone'))
     return summaries.value.find((x) => loot.name.toLowerCase().includes(x.name.toLowerCase()))?.getIcon({locale: "default", version: "latest"});
 
   return loot.getImage('latest');
 }
-
-watch(currentLocale, async() => {
-  loots.value = await getLoots();
-  summaries.value = await getSummaries();
-});
 </script>
 
 <template>  

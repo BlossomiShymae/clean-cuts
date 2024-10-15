@@ -5,10 +5,9 @@ const route = useRoute();
 const id = route.params.id as unknown;
 
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getItems = async () => await client.items.listAsync({locale: currentLocale.value, version: "latest"});
 
-const items = ref(await getItems());
+const { data: items } = await useLocalizedData(async (x) => await client.items.listAsync({locale: x, version: "latest"}));
+
 const _default = new Item({});
 
 const item = computed(() => items.value.find((x) => x.id == id) || _default);

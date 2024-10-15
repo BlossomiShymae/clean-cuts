@@ -1,13 +1,8 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getTftMapSkins = async () => (await client.tftMapSkins.listAsync({ locale: currentLocale.value, version: "latest"}))
-  .sort((a, b) => a.itemId - b.itemId);
 
-const tftMapSkins = ref(await getTftMapSkins());
-watch(currentLocale, async() => {
-  tftMapSkins.value = await getTftMapSkins();
-});
+const { data: tftMapSkins } = await useLocalizedData(async (x) => (await client.tftMapSkins.listAsync({ locale: x, version: "latest"}))
+  .sort((a, b) => a.itemId - b.itemId));
 
 const { query, results } = useQueryable(tftMapSkins, (x) => x.itemId, (x) => x.name);
 </script>

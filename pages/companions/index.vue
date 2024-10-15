@@ -1,13 +1,8 @@
 <script setup lang="ts">
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getCompanions = async () => (await client.companions.listAsync({locale: currentLocale.value, version: "latest"}))
-.sort((a, b) => a.itemId - b.itemId);
 
-const companions = ref(await getCompanions());
-watch(currentLocale, async() => {
-  companions.value = await getCompanions();
-});
+const { data: companions } = await useLocalizedData(async (x) => (await client.companions.listAsync({locale: x, version: "latest"}))
+.sort((a, b) => a.itemId - b.itemId));
 
 const { query, paginate } = useQueryable(companions, (x) => x.itemId, (x) => x.name);
 const pagination = paginate(100);

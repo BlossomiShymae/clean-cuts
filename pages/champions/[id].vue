@@ -5,14 +5,9 @@ const route = useRoute();
 const id = route.params.id as unknown;
 
 const { client } = useClient();
-const { currentLocale } = useLocale();
-const getChampion = async () => await client.champions.getAsync(id as number, {locale: currentLocale.value, version: "latest"});
+const { currentLocale, data: champion } = await useLocalizedData(async (x) => await client.champions.getAsync(id as number, {locale: x, version: "latest"}));
 
-const champion = ref(await getChampion());
 const data = computed(() => `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/${champion.value.id}.json`);
-watch(currentLocale, async () => {
-  champion.value = await getChampion();
-});
 
 const currentSkin = ref(champion.value.skins[0]);
 const swapCurrentSkin = (id: number) => {
